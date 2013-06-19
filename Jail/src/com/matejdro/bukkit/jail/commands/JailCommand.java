@@ -86,10 +86,8 @@ public class JailCommand extends BaseCommand {
 					Util.Message(Settings.getGlobalString(Setting.MessageTooLongReason), sender);
 					return true;
 				}
-				
 			}
 		}
-		
 		Player player = Util.getPlayer(playerName, true);
 		
 		if (player == null && !Util.playerExists(playerName))

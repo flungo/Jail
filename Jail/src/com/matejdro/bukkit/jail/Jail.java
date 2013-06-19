@@ -2,11 +2,13 @@ package com.matejdro.bukkit.jail;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Logger;
 
 import javax.swing.Timer;
 
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Creature;
@@ -68,6 +70,11 @@ public class Jail extends JavaPlugin {
 	public static Plugin permissions = null;
 
 	private HashMap<String, BaseCommand> commands = new HashMap<String, BaseCommand>();
+	
+	public ArrayList<Material> helmets = new ArrayList<Material>();
+	public ArrayList<Material> chestPlates = new ArrayList<Material>();
+	public ArrayList<Material> leggings = new ArrayList<Material>();
+	public ArrayList<Material> boots = new ArrayList<Material>();
 
 	//Test
 	//public Jail(PluginLoader pluginLoader, Server instance, PluginDescriptionFile desc, File folder, File plugin, ClassLoader cLoader) {
@@ -105,7 +112,6 @@ public class Jail extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(entityListener, this);
 		getServer().getPluginManager().registerEvents(playerListener, this);
 		getServer().getPluginManager().registerEvents(playerPreventListener, this);
-
 		
 		//Init timers
 		lastCheckTime = System.currentTimeMillis();

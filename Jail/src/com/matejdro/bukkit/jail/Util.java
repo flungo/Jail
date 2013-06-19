@@ -24,7 +24,7 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 
 public class Util {
     public static Permission permission = null;
-	
+    
 	public static void Message(String message, Player player)
 	{
 		message = message.replaceAll("\\&([0-9abcdef])", "§$1");
@@ -209,5 +209,4 @@ public class Util {
 		
 		return false;
     }
-
 }

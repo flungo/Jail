@@ -71,7 +71,7 @@ public class PrisonerManager {
 		}
 		if (jail == null)
 		{
-			Util.Message("You are lucky! Server admin was too lazy to set up jail. Go now!", player);
+			Util.Message("You are lucky! The server admin was too lazy to set up a jail. Go now!", player);
 			Jail.log.info("[Jail] There is no jail to pick! Make sure, you have build at least one jail and at least one jail is set to automatic!");
 			return;
 		}
@@ -209,8 +209,9 @@ public class PrisonerManager {
 					if (chest.getInventory().getItem(i) == null || chest.getInventory().getItem(i).getType() == Material.AIR) continue;
 					if (player.getInventory().firstEmpty() == -1)
 						player.getWorld().dropItem(player.getLocation(), chest.getInventory().getItem(i));
-					else
+					else{
 						player.getInventory().addItem(chest.getInventory().getItem(i));
+					}
 				}
 				chest.getInventory().clear();				
 			}
