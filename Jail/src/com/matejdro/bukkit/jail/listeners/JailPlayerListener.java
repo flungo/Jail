@@ -69,7 +69,7 @@ public class JailPlayerListener implements Listener {
 			JailLog logger = new JailLog();
 			damager.sendMessage(ChatColor.RED + "You jailed " + ChatColor.GREEN + player.getName() + ChatColor.RED +  " for " + ChatColor.GREEN + Integer.parseInt(param[2]) + ChatColor.RED + " minutes");
 			if(Settings.getGlobalBoolean(Setting.EnableLogging)){
-				logger.logToFile(player, Integer.parseInt(param[2]), param[4], damager.getName());
+				logger.logToFile(player, Integer.parseInt(param[2]), param[4], damager.getName(), player.getName());
 			}
 		}
 		
@@ -90,6 +90,8 @@ public class JailPlayerListener implements Listener {
 		 if (Jail.prisoners.containsKey(event.getPlayer().getName().toLowerCase()))
 		 {
 			 JailPrisoner prisoner = Jail.prisoners.get(event.getPlayer().getName().toLowerCase());
+			 event.getPlayer().teleport(prisoner.getJail().getTeleportLocation());
+			 
 			 if (prisoner.offlinePending())
 			 {
 				 if (prisoner.getTransferDestination().isEmpty())

@@ -125,6 +125,12 @@ public enum Setting {
 	MessagePrisonerOffline("Message.PrisonerOffline", "Prisoner <Player> is offline. He will be moved to jail at next login."),
 	MessageEscape("Messages.Escape", "<Player> have escaped from jail!"),
 	
+	//Jail Vote
+	VoteJailEnabled("Jail Vote.Enabled", true),
+	VoteJailTime("Jail Vote.Time", 5),
+	VoteJailReason("Jail Vote.Reason", "Jailed by players"),
+	VoteJailVoteTime("Jail Vote.Vote Time", 60),
+	
 	BroadcastJailMessage("Broadcast Jail Message", false),
 	EnableLogging("Logger.Enabled", true),
 	Debug("Debug", false);

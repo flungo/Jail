@@ -21,7 +21,7 @@ public class JailLog {
         
     }
     
-    public void logToFile(Player player, Integer time, String reason, String sender)
+    public void logToFile(Player player, Integer time, String reason, String sender, String name)
     {
         try{
             File dataFolder = Jail.instance.getDataFolder();
@@ -43,7 +43,11 @@ public class JailLog {
             DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
             Date date = new Date();
             
-            pw.println("[" + dateFormat.format(date) + "] " + player.getName() + " was jailed for " + time + " minutes by " + sender +". Reason: " + reason);
+            if(player != null){
+            	pw.println("[" + dateFormat.format(date) + "] " + player.getName() + " was jailed for " + time + " minutes by " + sender +". Reason: " + reason);
+            }else{
+            	pw.println("[" + dateFormat.format(date) + "] " + name + " was jailed for " + time + " minutes by " + sender +". Reason: " + reason);
+            }
             pw.flush();
             pw.close();
             

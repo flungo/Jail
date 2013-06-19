@@ -108,7 +108,7 @@ public class JailCommand extends BaseCommand {
 		if (player == null){
 			message = Settings.getGlobalString(Setting.MessagePrisonerOffline);
 			if(Settings.getGlobalBoolean(Setting.EnableLogging)){
-				logger.logToFile(player, time, reason, sender.getName());
+				logger.logToFile(player, time, reason, sender.getName(), args[0]);
 			}
 		}else{
 			message = Settings.getGlobalString(Setting.MessagePrisonerJailed);
@@ -122,7 +122,7 @@ public class JailCommand extends BaseCommand {
 				Bukkit.broadcastMessage(Settings.getGlobalString(Setting.MessagePrisonerJailed) + " Reason: " + reason1);
 			}
 			if(Settings.getGlobalBoolean(Setting.EnableLogging)){
-				logger.logToFile(player, time, reason, sender.getName());
+				logger.logToFile(player, time, reason, sender.getName(), player.getName());
 			}
 		}
 		message = prisoner.parseTags(message);
