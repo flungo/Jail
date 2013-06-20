@@ -58,7 +58,7 @@ public class JailVoteCommand extends BaseCommand{
 								JailVote.voteStarted = false;
 								JailVote.hasVoted.clear();
 							}else{
-								Jail.instance.getServer().broadcastMessage(ChatColor.GREEN + target.getName() + ChatColor.WHITE + " was not jailed, " + ChatColor.GOLD + JailVote.noVotes + " players " + ChatColor.WHITE + " voted no!");
+								Jail.instance.getServer().broadcastMessage(ChatColor.GREEN + target.getName() + ChatColor.WHITE + " was not jailed, " + ChatColor.GOLD + JailVote.noVotes + " players " + ChatColor.WHITE + " voted no and " + ChatColor.GOLD + JailVote.yesVotes + " players " + ChatColor.WHITE + " voted yes!");
 								JailVote.yesVotes = 0;
 								JailVote.noVotes = 0;
 								JailVote.voteStarted = false;
@@ -107,5 +107,4 @@ public class JailVoteCommand extends BaseCommand{
 			return true;
 		}
 	}
-
 }
