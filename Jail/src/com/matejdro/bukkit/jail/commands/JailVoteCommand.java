@@ -30,42 +30,46 @@ public class JailVoteCommand extends BaseCommand{
 				Util.Message(ChatColor.RED + "You must specify a player", player);
 			}else{
 				if(Jail.instance.getServer().getPlayer(args[0]) != null){
-					if(JailVote.voteStarted){
-						Util.Message(ChatColor.RED + "A vote is already running", player);
-						return true;
-					}
-					
-					JailVote.voteStarted = true;
-					JailVote.hasVoted.add(player);
-					
-					final Player target = Jail.instance.getServer().getPlayer(args[0]);
-					Jail.instance.getServer().broadcastMessage(ChatColor.DARK_AQUA + "------------ Jail -----------");
-					Jail.instance.getServer().broadcastMessage(ChatColor.GREEN + player.getName() + ChatColor.AQUA + " has voted that " + ChatColor.RED + target.getName() + ChatColor.AQUA + " should be jailed.");
-					Jail.instance.getServer().broadcastMessage(ChatColor.GOLD + "Type " + ChatColor.GREEN + "/votejail yes" + ChatColor.GOLD + " if you agree");
-					Jail.instance.getServer().broadcastMessage(ChatColor.GOLD + "or type " + ChatColor.GREEN + "/votejail no" + ChatColor.GOLD + " if you disagree");
-					Jail.instance.getServer().broadcastMessage(ChatColor.AQUA + "You have "  + ChatColor.GREEN + "60" + ChatColor.AQUA + " seconds to vote!");
-					Jail.instance.getServer().broadcastMessage(ChatColor.DARK_AQUA + "----------------------------");
-					@SuppressWarnings("unused")
-					BukkitTask task = new BukkitRunnable(){
-						@Override
-						public void run() {
-							if(JailVote.yesVotes > JailVote.noVotes){
-								JailPrisoner prisoner = new JailPrisoner(target.getName(), Settings.getGlobalInt(Setting.VoteJailTime) * 6, "", "", false, "", Settings.getGlobalString(Setting.VoteJailReason), true, "", "Players", "");
-								PrisonerManager.Jail(prisoner, target);
-								Jail.instance.getServer().broadcastMessage(ChatColor.GREEN + target.getName() + ChatColor.WHITE + " was jailed for " + Settings.getGlobalInt(Setting.VoteJailTime) + " mins , " + ChatColor.GOLD + JailVote.yesVotes + " players" + ChatColor.WHITE + " voted yes!");
-								JailVote.yesVotes = 0;
-								JailVote.noVotes = 0;
-								JailVote.voteStarted = false;
-								JailVote.hasVoted.clear();
-							}else{
-								Jail.instance.getServer().broadcastMessage(ChatColor.GREEN + target.getName() + ChatColor.WHITE + " was not jailed, " + ChatColor.GOLD + JailVote.noVotes + " players " + ChatColor.WHITE + " voted no and " + ChatColor.GOLD + JailVote.yesVotes + " players " + ChatColor.WHITE + " voted yes!");
-								JailVote.yesVotes = 0;
-								JailVote.noVotes = 0;
-								JailVote.voteStarted = false;
-								JailVote.hasVoted.clear();
-							}
+					if(!player.hasPermission("jail.usercmd.jailvote.player")){
+						Util.Message(ChatColor.RED + "You don't have permission to do this!", player);
+					}else{
+						if(JailVote.voteStarted){
+							Util.Message(ChatColor.RED + "A vote is already running", player);
+							return true;
 						}
-					}.runTaskLater(Jail.instance, 1200);
+						
+						JailVote.voteStarted = true;
+						JailVote.hasVoted.add(player);
+						
+						final Player target = Jail.instance.getServer().getPlayer(args[0]);
+						Jail.instance.getServer().broadcastMessage(ChatColor.DARK_AQUA + "------------ Jail -----------");
+						Jail.instance.getServer().broadcastMessage(ChatColor.GREEN + player.getName() + ChatColor.AQUA + " has voted that " + ChatColor.RED + target.getName() + ChatColor.AQUA + " should be jailed.");
+						Jail.instance.getServer().broadcastMessage(ChatColor.GOLD + "Type " + ChatColor.GREEN + "/votejail yes" + ChatColor.GOLD + " if you agree");
+						Jail.instance.getServer().broadcastMessage(ChatColor.GOLD + "or type " + ChatColor.GREEN + "/votejail no" + ChatColor.GOLD + " if you disagree");
+						Jail.instance.getServer().broadcastMessage(ChatColor.AQUA + "You have "  + ChatColor.GREEN + "60" + ChatColor.AQUA + " seconds to vote!");
+						Jail.instance.getServer().broadcastMessage(ChatColor.DARK_AQUA + "----------------------------");
+						@SuppressWarnings("unused")
+						BukkitTask task = new BukkitRunnable(){
+							@Override
+							public void run() {
+								if(JailVote.yesVotes > JailVote.noVotes){
+									JailPrisoner prisoner = new JailPrisoner(target.getName(), Settings.getGlobalInt(Setting.VoteJailTime) * 6, "", "", false, "", Settings.getGlobalString(Setting.VoteJailReason), true, "", "Players", "");
+									PrisonerManager.Jail(prisoner, target);
+									Jail.instance.getServer().broadcastMessage(ChatColor.GREEN + target.getName() + ChatColor.WHITE + " was jailed for " + Settings.getGlobalInt(Setting.VoteJailTime) + " mins , " + ChatColor.GOLD + JailVote.yesVotes + " players" + ChatColor.WHITE + " voted yes!");
+									JailVote.yesVotes = 0;
+									JailVote.noVotes = 0;
+									JailVote.voteStarted = false;
+									JailVote.hasVoted.clear();
+								}else{
+									Jail.instance.getServer().broadcastMessage(ChatColor.GREEN + target.getName() + ChatColor.WHITE + " was not jailed, " + ChatColor.GOLD + JailVote.noVotes + " players " + ChatColor.WHITE + " voted no and " + ChatColor.GOLD + JailVote.yesVotes + " players " + ChatColor.WHITE + " voted yes!");
+									JailVote.yesVotes = 0;
+									JailVote.noVotes = 0;
+									JailVote.voteStarted = false;
+									JailVote.hasVoted.clear();
+								}
+							}
+						}.runTaskLater(Jail.instance, 1200);
+					}
 				}else{
 					if(args[0].equalsIgnoreCase("yes") && JailVote.voteStarted && !JailVote.hasVoted.contains(player)){
 						JailVote.yesVotes ++;

@@ -110,7 +110,6 @@ public class JailSetCommand extends BaseCommand {
 			try {
 				InputOutput.global.save(new File("plugins" + File.separator + "Jail","global.yml"));
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

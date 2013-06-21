@@ -63,7 +63,6 @@ public class JailPlayerListener implements Listener {
 		}
 		
 		if(Util.permission(damager, "jail.usejailstick." + String.valueOf(damager.getItemInHand().getTypeId()), PermissionDefault.OP) && Jail.jailStickToggle.get(player)){
-			event.setDamage(0);
 			JailPrisoner prisoner = new JailPrisoner(player.getName(), Integer.parseInt(param[2]), param[3], "", false, "", param[4], false, "", "", "");
 			PrisonerManager.PrepareJail(prisoner, player);
 			JailLog logger = new JailLog();

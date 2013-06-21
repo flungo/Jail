@@ -125,7 +125,6 @@ public class Util {
     	    	out.close();
     	    	fstream.close();
     		} catch (IOException e) {
-    			// TODO Auto-generated catch block
     			Jail.log.log(Level.SEVERE, "[Jail]: Unable to write debug data to log file.");
 
     			e.printStackTrace();

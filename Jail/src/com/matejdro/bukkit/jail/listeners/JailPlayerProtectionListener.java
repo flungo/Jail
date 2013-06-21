@@ -103,8 +103,7 @@ public class JailPlayerProtectionListener implements Listener {
 			}
 		}
 	}
-		
-		 
+	
 	@EventHandler()
 	 public void onPlayerMove(PlayerMoveEvent event) {
 		 if (event.isCancelled()) return;

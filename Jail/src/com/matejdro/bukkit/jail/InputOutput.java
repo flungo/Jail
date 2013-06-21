@@ -101,13 +101,12 @@ public class InputOutput {
 	    	global.save(new File(Jail.instance.getDataFolder(),"global.yml"));
 
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		} catch (InvalidConfigurationException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -163,7 +162,7 @@ public class InputOutput {
 			try {
 				jails.save(new File(Jail.instance.getDataFolder(),"jails.yml"));
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			}
 			set.close();
@@ -172,7 +171,7 @@ public class InputOutput {
 
 		} catch (SQLException e) {
 			Jail.log.log(Level.SEVERE, "[Jail] Error while loading Jail zones! - " + e.getMessage());
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 
@@ -217,7 +216,7 @@ public class InputOutput {
 
 		} catch (SQLException e) {
 			Jail.log.log(Level.SEVERE, "[Jail] Error while loading prisoners from the database! - " + e.getMessage() );
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
     }
@@ -318,7 +317,7 @@ public class InputOutput {
 			try {
 				jails.save(new File(Jail.instance.getDataFolder(),"jails.yml"));
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			}
     	} catch (SQLException e) {
@@ -358,7 +357,7 @@ public class InputOutput {
 			ps.close();
 		} catch (SQLException e) {
 			Jail.log.log(Level.SEVERE,"[Jail] Error while creating Jail Zone! - " + e.getMessage() );
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
     }
@@ -376,7 +375,7 @@ public class InputOutput {
 			ps.close();
 		} catch (SQLException e) {
 			Jail.log.log(Level.SEVERE,"[Jail] Error while deleting Zone from DB! - " + e.getMessage() );
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
     }
@@ -414,7 +413,7 @@ public class InputOutput {
 			ps.close();
 		} catch (SQLException e) {
 			Jail.log.log(Level.SEVERE,"[Jail] Error while inserting Prisoner into DB! - " + e.getMessage() );
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
     }
@@ -453,7 +452,7 @@ public class InputOutput {
 
 		} catch (SQLException e) {
 			Jail.log.log(Level.SEVERE,"[Jail] Error while inserting Cell into DB! - " + e.getMessage() );
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
     }
@@ -492,7 +491,7 @@ public class InputOutput {
 
 		} catch (SQLException e) {
 			Jail.log.log(Level.SEVERE,"[Jail] Error while updating Cell into DB!");
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
     }
@@ -509,7 +508,7 @@ public class InputOutput {
 			ps.close();
 		} catch (SQLException e) {
 			Jail.log.log(Level.SEVERE,"[Jail] Error while deleting Cell from DB! - " + e.getMessage() );
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
     }
@@ -549,7 +548,7 @@ public class InputOutput {
 
 		} catch (SQLException e) {
 			Jail.log.log(Level.SEVERE,"[Jail] Error while updating Prisoner into DB!");
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
     }
@@ -566,7 +565,7 @@ public class InputOutput {
 			ps.close();
 		} catch (SQLException e) {
 			Jail.log.log(Level.SEVERE,"[Jail] Error while deleting Prisoner from DB! - " + e.getMessage() );
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
     }
@@ -604,7 +603,6 @@ public class InputOutput {
 			ps.close();
 		} catch (SQLException e) {
 			Jail.log.log(Level.SEVERE,"[Jail] Error while updating Prisoner into DB! - " + e.getMessage() );
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     }

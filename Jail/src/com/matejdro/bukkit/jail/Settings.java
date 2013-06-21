@@ -69,7 +69,6 @@ public class Settings {
 		try {
 			InputOutput.jails.save(new File("plugins" + File.separator + "Jail","jails.yml"));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
