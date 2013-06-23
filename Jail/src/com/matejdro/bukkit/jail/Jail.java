@@ -8,6 +8,8 @@ import java.util.logging.Logger;
 
 import javax.swing.Timer;
 
+import me.muizers.Notifications.Notifications;
+
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -58,6 +60,7 @@ public class Jail extends JavaPlugin {
 	private JailEntityListener entityListener;
 	public JailAPI API;
 	public InputOutput IO;
+	public Notifications notificationsPlugin;
 	public static HashMap<String,JailZone> zones = new HashMap<String,JailZone>();
 	public static HashMap<String,JailPrisoner> prisoners = new HashMap<String,JailPrisoner>();
 	public static HashMap<Creature, JailPrisoner> guards = new HashMap<Creature, JailPrisoner>();
@@ -108,7 +111,15 @@ public class Jail extends JavaPlugin {
 		IO.LoadJails();
 		IO.LoadPrisoners();
 		IO.LoadCells();
-
+		
+		notificationsPlugin = (Notifications) getServer().getPluginManager().getPlugin("Notifications");
+		
+		if(notificationsPlugin == null){
+			getLogger().info("Notifications plugin not installed");
+		}else{
+			getLogger().info("Notifications plugin is installed");
+		}
+		
 		getServer().getPluginManager().registerEvents(blockListener, this);
 		getServer().getPluginManager().registerEvents(entityListener, this);
 		getServer().getPluginManager().registerEvents(playerListener, this);
@@ -131,7 +142,6 @@ public class Jail extends JavaPlugin {
 			});
 			timer.start();
 		}
-
 
 		commands.put("jail", new JailCommand());
 		commands.put("unjail", new UnJailCommand());

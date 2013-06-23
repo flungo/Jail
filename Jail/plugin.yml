@@ -4,7 +4,7 @@ version: 2.4.1
 description: Ban too harsh? Kick/mute/whatever not enough? Jail bad players!
 author: matejdro
 website: dev.bukkit.org/server-mods/jail/
-softdepend: [Spout, WorldEdit, Vault]
+softdepend: [Spout, WorldEdit, Vault, Notifications]
 commands:
     jailcreate:
         description: Creates a new jail zone.

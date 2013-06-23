@@ -25,6 +25,7 @@ import com.matejdro.bukkit.jail.JailCell;
 import com.matejdro.bukkit.jail.JailPrisoner;
 import com.matejdro.bukkit.jail.JailZone;
 import com.matejdro.bukkit.jail.Setting;
+import com.matejdro.bukkit.jail.Settings;
 import com.matejdro.bukkit.jail.Util;
 
 @SuppressWarnings("deprecation")
@@ -45,6 +46,11 @@ public class JailPlayerProtectionListener implements Listener {
 		{
 			Util.Message(prisoner.getJail().getSettings().getString(Setting.MessageMute), event.getPlayer());
 			event.setCancelled(true);
+		}
+		for(String playerName: Jail.prisoners.keySet()){
+			if(!Settings.getGlobalBoolean(Setting.PlayerRecieveMessages)){
+				event.getRecipients().remove(Jail.instance.getServer().getPlayer(playerName));
+			}
 		}
 	}
 	
@@ -295,7 +301,6 @@ public class JailPlayerProtectionListener implements Listener {
 					}, 1);
 				}
 			}
-
 	 }
 	
 	@EventHandler
@@ -318,10 +323,5 @@ public class JailPlayerProtectionListener implements Listener {
 				return;
 			}
 		}
-
 	}
-
-	 
-	 
-	
 }

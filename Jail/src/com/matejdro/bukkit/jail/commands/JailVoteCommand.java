@@ -1,5 +1,9 @@
 package com.matejdro.bukkit.jail.commands;
 
+import java.awt.Color;
+
+import me.muizers.Notifications.Notification;
+
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -55,6 +59,10 @@ public class JailVoteCommand extends BaseCommand{
 								if(JailVote.yesVotes > JailVote.noVotes){
 									JailPrisoner prisoner = new JailPrisoner(target.getName(), Settings.getGlobalInt(Setting.VoteJailTime) * 6, "", "", false, "", Settings.getGlobalString(Setting.VoteJailReason), true, "", "Players", "");
 									PrisonerManager.Jail(prisoner, target);
+									if(Jail.instance.notificationsPlugin != null){
+										Notification jailNotification = new Notification("Jail", target.getName() + " was jailed by players vote", "For " + Settings.getGlobalInt(Setting.VoteJailTime) + " mins", Color.ORANGE, Color.RED, Color.RED);
+										Jail.instance.notificationsPlugin.showNotification(jailNotification);
+									}
 									Jail.instance.getServer().broadcastMessage(ChatColor.GREEN + target.getName() + ChatColor.WHITE + " was jailed for " + Settings.getGlobalInt(Setting.VoteJailTime) + " mins , " + ChatColor.GOLD + JailVote.yesVotes + " players" + ChatColor.WHITE + " voted yes!");
 									JailVote.yesVotes = 0;
 									JailVote.noVotes = 0;

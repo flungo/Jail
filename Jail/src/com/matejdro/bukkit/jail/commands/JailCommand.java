@@ -1,5 +1,9 @@
 package com.matejdro.bukkit.jail.commands;
 
+import java.awt.Color;
+
+import me.muizers.Notifications.Notification;
+
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.command.CommandSender;
@@ -99,6 +103,12 @@ public class JailCommand extends BaseCommand {
 
 		JailPrisoner prisoner = new JailPrisoner(playerName, time * 6, jailname, cellname, false, "", reason, muted, "", sender instanceof Player ? ((Player) sender).getName() : "console", ""); 
 		PrisonerManager.PrepareJail(prisoner, player);
+		
+		if(Jail.instance.notificationsPlugin != null){
+			Notification jailNotification = new Notification("Jail", playerName + " was jailed by " + sender.getName(), "For " + time + " mins", Color.ORANGE, Color.RED, Color.RED);
+			Jail.instance.notificationsPlugin.showNotification(jailNotification);
+		}
+		
 		if(player != null){
 			player.setGameMode(GameMode.SURVIVAL);
 		}

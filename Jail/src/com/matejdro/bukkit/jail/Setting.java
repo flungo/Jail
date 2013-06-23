@@ -57,6 +57,7 @@ public enum Setting {
 	EnableFoodControl("Protections.EnableFoodControl", true),
 	FoodControlMinimumFood("Protections.FoodControlMinimumFood", 10),
 	FoodControlMaximumFood("Protections.FoodControlMaximumFood", 20),
+	PlayerRecieveMessages("Protections.PlayerRecievesMessages", true),
 
 	
 	//JailPay

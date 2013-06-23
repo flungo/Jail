@@ -5,5 +5,6 @@
 	<classpathentry kind="lib" path="lib/Vault (1).jar"/>
 	<classpathentry kind="lib" path="lib/WorldEdit.jar"/>
 	<classpathentry kind="lib" path="lib/craftbukkit-1.5.2-R1.1-20130617.161801-2.jar"/>
+	<classpathentry kind="lib" path="lib/Notifications.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
