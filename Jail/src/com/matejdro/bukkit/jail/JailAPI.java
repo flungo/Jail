@@ -52,7 +52,7 @@ public class JailAPI {
 		if (cellName == null) cellName = "";
 		if (reason == null) reason = "";
 		
-		JailPrisoner prisoner = new JailPrisoner(playerName, time, jailName, cellName, false, "", reason, false, "", jailer, "");
+		JailPrisoner prisoner = new JailPrisoner(playerName, time, jailName, cellName, false, "", reason, false, "", jailer, "", Jail.instance.getServer().getPlayer(playerName).getGameMode());
 		Player player = Util.getPlayer(playerName, false);	
 		
 		PrisonerManager.PrepareJail(prisoner, player);

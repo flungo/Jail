@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.Random;
 
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -37,6 +38,7 @@ public class JailPrisoner {
 	private String reason = "";
 	private JailCell cell;
 	private String inventory = "";
+	private GameMode previousGameMode;
 	private ArrayList<ItemMeta> itemMetas = new ArrayList<ItemMeta>();
 	private String jailer = "";
 	private HashSet<Creature> guards = new HashSet<Creature>();
@@ -66,7 +68,7 @@ public class JailPrisoner {
 	 * @param Inventory Inventory string for this prisoner
 	 * @param Jailer Who jailed this prisoner
 	 */
-	public JailPrisoner(String Name, int Remaintime, String Jail, String Cell,  Boolean Offline, String TransferDest, String Reason, Boolean Muted, String Inventory, String Jailer, String Permissions)
+	public JailPrisoner(String Name, int Remaintime, String Jail, String Cell,  Boolean Offline, String TransferDest, String Reason, Boolean Muted, String Inventory, String Jailer, String Permissions, GameMode Gamemode)
 	{
 		name = Name.toLowerCase();
 		remaintime = Remaintime;
@@ -79,6 +81,7 @@ public class JailPrisoner {
 		jailer = Jailer;
 		requestedCell = Cell;
 		afktime = 0;
+		previousGameMode = Gamemode;
 		setOldPermissions(Permissions);
 	}
 		
@@ -716,7 +719,6 @@ public class JailPrisoner {
 		else
 		{
 			PrisonerManager.UnJail(this, player);
-			
 		}
 
 	}
@@ -801,6 +803,14 @@ public class JailPrisoner {
 			Util.setPermissionsGroups(getName(), getOldPermissions(), jail.getTeleportLocation().getWorld().getName());
 		}
 
+	}
+
+	public GameMode getPreviousGameMode() {
+		return previousGameMode;
+	}
+
+	public void setPreviousGameMode(GameMode previousGameMode) {
+		this.previousGameMode = previousGameMode;
 	}
 	
 	}

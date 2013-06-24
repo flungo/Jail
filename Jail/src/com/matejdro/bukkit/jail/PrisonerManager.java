@@ -231,6 +231,8 @@ public class PrisonerManager {
 		
 		if (jail.getSettings().getBoolean(Setting.TeleportPrisonerOnRelease)) player.teleport(prisoner.getReleaseTeleportLocation());
 		
+		if(prisoner.getPreviousGameMode() != null) player.setGameMode(prisoner.getPreviousGameMode());
+		
 		prisoner.restoreInventory(player);
 		prisoner.delete();
 		

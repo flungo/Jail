@@ -204,7 +204,7 @@ public class InputOutput {
 				String previousPosition = set.getString("PreviousPosition");
 				Boolean muted = set.getBoolean("muted");
 				
-				JailPrisoner p = new JailPrisoner(name, remaintime, jailname, null, offline, transferDest, reason, muted,  inventory, jailer, permissions);
+				JailPrisoner p = new JailPrisoner(name, remaintime, jailname, null, offline, transferDest, reason, muted,  inventory, jailer, permissions, Jail.instance.getServer().getPlayer(set.getString("PlayerName").toLowerCase()).getGameMode());
 				p.setPreviousPosition(previousPosition);
 				
 				Jail.prisoners.put(p.getName(), p);
