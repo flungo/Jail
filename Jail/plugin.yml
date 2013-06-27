@@ -1,6 +1,6 @@
 name: Jail
 main: com.matejdro.bukkit.jail.Jail
-version: 2.4.1
+version: 2.4.5
 description: Ban too harsh? Kick/mute/whatever not enough? Jail bad players!
 author: matejdro
 website: dev.bukkit.org/server-mods/jail/
@@ -155,7 +155,7 @@ permissions:
     jail.usercmd.jailvote:
         default: true
     jail.usercmd.jailvote.player:
-        default: true
+        default: op
     jail.usercmd.jailstatus:
         default: true
     jail.usercmd.jailpay:

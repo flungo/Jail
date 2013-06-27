@@ -62,7 +62,7 @@ public class JailPlayerListener implements Listener {
 			Jail.jailStickToggle.put(player, false);
 		}
 		
-		if(Util.permission(damager, "jail.usejailstick." + String.valueOf(damager.getItemInHand().getTypeId()), PermissionDefault.OP) && Jail.jailStickToggle.get(player)){
+		if(Util.permission(damager, "jail.usejailstick." + String.valueOf(damager.getItemInHand().getTypeId()), PermissionDefault.OP) && Jail.jailStickToggle.get(damager)){
 			JailPrisoner prisoner = new JailPrisoner(player.getName(), Integer.parseInt(param[2]), param[3], "", false, "", param[4], false, "", "", "", player.getGameMode());
 			PrisonerManager.PrepareJail(prisoner, player);
 			JailLog logger = new JailLog();
@@ -86,6 +86,11 @@ public class JailPlayerListener implements Listener {
 	
 	@EventHandler()
 	public void onPlayerJoin(PlayerJoinEvent event) {
+		if(event.getPlayer().isOp() && Jail.updateNeeded){
+			event.getPlayer().sendMessage(ChatColor.BLUE + "There is an update for the jail plugin!");
+			Jail.updateNeeded = false;
+		}
+		
 		 if (Jail.prisoners.containsKey(event.getPlayer().getName().toLowerCase()))
 		 {
 			 JailPrisoner prisoner = Jail.prisoners.get(event.getPlayer().getName().toLowerCase());

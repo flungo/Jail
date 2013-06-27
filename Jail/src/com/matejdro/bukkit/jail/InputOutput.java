@@ -13,6 +13,7 @@ import java.sql.Statement;
 import java.util.HashMap;
 import java.util.logging.Level;
 
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.block.Sign;
 import org.bukkit.configuration.InvalidConfigurationException;
@@ -204,7 +205,8 @@ public class InputOutput {
 				String previousPosition = set.getString("PreviousPosition");
 				Boolean muted = set.getBoolean("muted");
 				
-				JailPrisoner p = new JailPrisoner(name, remaintime, jailname, null, offline, transferDest, reason, muted,  inventory, jailer, permissions, Jail.instance.getServer().getPlayer(set.getString("PlayerName").toLowerCase()).getGameMode());
+				JailPrisoner p = new JailPrisoner(name, remaintime, jailname, null, offline, transferDest, reason, muted,  inventory, jailer, permissions, GameMode.SURVIVAL);
+			
 				p.setPreviousPosition(previousPosition);
 				
 				Jail.prisoners.put(p.getName(), p);

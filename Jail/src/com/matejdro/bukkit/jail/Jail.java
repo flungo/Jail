@@ -67,11 +67,15 @@ public class Jail extends JavaPlugin {
 	public static HashMap<Player, Boolean> jailStickToggle = new HashMap<Player, Boolean>();
 	private Timer timer;
 	
+	protected UpdateChecker updateChecker;
+	
 	private long lastCheckTime = 0;
 
 	public static Jail instance;
 
 	public static Plugin permissions = null;
+	
+	public static boolean updateNeeded = false;
 
 	private HashMap<String, BaseCommand> commands = new HashMap<String, BaseCommand>();
 	
@@ -105,7 +109,15 @@ public class Jail extends JavaPlugin {
 		entityListener = new JailEntityListener(this);
 		IO = new InputOutput();
 		API = new JailAPI();
-
+		
+		if(Settings.getGlobalBoolean(Setting.AllowUpdateNotifications)){
+			this.updateChecker = new UpdateChecker(this, "http://dev.bukkit.org/bukkit-plugins/jail/files.rss");
+			if(this.updateChecker.updateNeeded()){
+				updateNeeded = true;
+				getLogger().info("There is an update avalible for Jail. Version " + this.updateChecker.getVersion() + ". Download it at " + this.updateChecker.getLink());
+			}
+		}
+		
 		IO.LoadSettings();
 		IO.PrepareDB();
 		IO.LoadJails();

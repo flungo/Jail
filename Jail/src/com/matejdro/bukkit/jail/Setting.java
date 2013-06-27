@@ -6,6 +6,7 @@ import java.util.Arrays;
 public enum Setting {
 	
 	SelectionTool("SelectionTool", 268),
+	AllowUpdateNotifications("AllowUpdateNotifications", true),
 	ExecutedCommandsOnJail("ExecutedCommandsOnJail", new ArrayList<String>()),
 	ExecutedCommandsOnRelease("ExecutedCommandsOnRelease", new ArrayList<String>()),
 	DeleteInventoryOnJail("DeleteInventoryOnJail", false),
@@ -57,7 +58,7 @@ public enum Setting {
 	EnableFoodControl("Protections.EnableFoodControl", true),
 	FoodControlMinimumFood("Protections.FoodControlMinimumFood", 10),
 	FoodControlMaximumFood("Protections.FoodControlMaximumFood", 20),
-	PlayerRecieveMessages("Protections.PlayerRecievesMessages", true),
+	PrisonersRecieveMessages("Protections.PlayerRecievesMessages", true),
 
 	
 	//JailPay

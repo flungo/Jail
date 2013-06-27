@@ -48,7 +48,7 @@ public class JailPlayerProtectionListener implements Listener {
 			event.setCancelled(true);
 		}
 		for(String playerName: Jail.prisoners.keySet()){
-			if(!Settings.getGlobalBoolean(Setting.PlayerRecieveMessages)){
+			if(!Settings.getGlobalBoolean(Setting.PrisonersRecieveMessages)){
 				event.getRecipients().remove(Jail.instance.getServer().getPlayer(playerName));
 			}
 		}
