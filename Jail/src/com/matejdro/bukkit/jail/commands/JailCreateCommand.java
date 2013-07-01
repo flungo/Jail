@@ -23,7 +23,5 @@ public class JailCreateCommand extends BaseCommand {
 		else
 			JailZoneCreation.selectstart((Player) sender, args[0].toLowerCase());
 		return true;
-		
 	}
-
 }

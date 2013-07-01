@@ -42,6 +42,11 @@ public class JailVoteCommand extends BaseCommand{
 							return true;
 						}
 						
+						if(Jail.instance.getServer().getPlayer(args[0]).hasPermission("jail.usercmd.jailvote.immune")){
+							Util.Message(ChatColor.RED + "You cannot vote for this player!", player);
+							return true;
+						}
+						
 						JailVote.voteStarted = true;
 						JailVote.hasVoted.add(player);
 						

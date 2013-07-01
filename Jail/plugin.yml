@@ -156,6 +156,8 @@ permissions:
         default: true
     jail.usercmd.jailvote.player:
         default: op
+    jail.usercmd.jailvote.immune:
+        default: op
     jail.usercmd.jailstatus:
         default: true
     jail.usercmd.jailpay:

@@ -58,8 +58,8 @@ public class JailPlayerListener implements Listener {
 		
 		String[] param = InputOutput.jailStickParameters.get(damager.getItemInHand().getTypeId());
 		
-		if(!Jail.jailStickToggle.containsKey(player)){
-			Jail.jailStickToggle.put(player, false);
+		if(!Jail.jailStickToggle.containsKey(damager)){
+			Jail.jailStickToggle.put(damager, false);
 		}
 		
 		if(Util.permission(damager, "jail.usejailstick." + String.valueOf(damager.getItemInHand().getTypeId()), PermissionDefault.OP) && Jail.jailStickToggle.get(damager)){
