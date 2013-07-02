@@ -79,6 +79,7 @@ public class JailEntityListener implements Listener {
 			event.setCancelled(true);
 	}
 	
+	@SuppressWarnings("deprecation")
 	@EventHandler()
 	public void onEntityDamage(EntityDamageEvent event) {
 		if (event.isCancelled()) return;
@@ -93,7 +94,7 @@ public class JailEntityListener implements Listener {
 					event.setCancelled(true);
 					return;
 			}
-			int newArmor = event.getDamage() - (event.getDamage() * jail.getSettings().getInt(Setting.GuardArmor) / 100);
+			int newArmor = (int) (event.getDamage() - (event.getDamage() * jail.getSettings().getInt(Setting.GuardArmor) / 100));
 			if (newArmor <= 0) newArmor = 1;
 			event.setDamage(newArmor);
 			

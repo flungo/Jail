@@ -485,7 +485,7 @@ public class JailPrisoner {
 	 * @param location Spawning location
 	 * @param player Player, associated with this JailPrisoner
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "deprecation" })
 	public void spawnGuards(int num, Location location, Player player)
 	{
 		List<BlockFace> checkedCorners = new ArrayList<BlockFace>();					
@@ -539,11 +539,6 @@ public class JailPrisoner {
 			}
 			
 			int health = getJail().getSettings().getInt(Setting.GuardHealth);
-			if (health > guard.getMaxHealth())
-			{
-				Jail.log.warning("[Jail] Guard health cannot be more than " + guard.getMaxHealth() + "! Use Armor to increase toughness of your guards!");
-				health = guard.getMaxHealth();
-			}
 			
 			guardTargets.add(player);
 			
