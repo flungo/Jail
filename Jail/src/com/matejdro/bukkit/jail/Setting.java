@@ -42,7 +42,7 @@ public enum Setting {
 	BlockDestroyProtectionExceptions("Protections.BlockDestroyProtectionExceptions", Arrays.asList(new String[]{"59"})),
 	EnablePlayerMoveProtection("Protections.EnablePlayerMoveProtection", true),
 	PlayerMoveProtectionPenalty("Protections.PlayerMoveProtectionPenalty", 30),
-	PlayerMoveProtectionAction("Protections.PlayerMoveProtectionAction", "guards"),
+	PlayerMoveProtectionAction("Protections.PlayerMoveProtectionAction", "teleport"),
 	PreventCommands("Protections.PreventCommands", Arrays.asList(new String[] {"/spawn", "/kill", "/warp"})),
 	WhitelistedCommands("Protections.WhitelistedCommands", new ArrayList<String>()),
 	CommandProtectionPenalty("Protections.CommandProtectionPenalty", 10),
