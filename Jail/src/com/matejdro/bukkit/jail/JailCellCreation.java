@@ -11,7 +11,6 @@ import org.bukkit.inventory.ItemStack;
 public class JailCellCreation {
 public static HashMap<String,CreationPlayer> players = new HashMap<String,CreationPlayer>();
 
-	
 	public static void selectstart(Player player, String name)
 	{
 		if (players.containsKey(player.getName()))
