@@ -78,7 +78,6 @@ public class Settings {
 		Object property = InputOutput.global.get(setting.getString());
 		if (property == null)
 		{
-			Jail.log.warning("[Jail] Configuration entry missing: " + setting.getString());
 			property = setting.getDefault();
 		}
 		

@@ -5,8 +5,8 @@ import java.util.Arrays;
 
 public enum Setting {
 	
-	SelectionTool("SelectionTool", 268),
 	AllowUpdateNotifications("AllowUpdateNotifications", true),
+	SelectionTool("SelectionTool", 268),
 	ExecutedCommandsOnJail("ExecutedCommandsOnJail", new ArrayList<String>()),
 	ExecutedCommandsOnRelease("ExecutedCommandsOnRelease", new ArrayList<String>()),
 	DeleteInventoryOnJail("DeleteInventoryOnJail", false),
