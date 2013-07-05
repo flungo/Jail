@@ -1,5 +1,6 @@
 package com.matejdro.bukkit.jail.listeners;
 
+import com.matejdro.bukkit.jail.*;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -12,16 +13,6 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.permissions.PermissionDefault;
 
-import com.matejdro.bukkit.jail.InputOutput;
-import com.matejdro.bukkit.jail.Jail;
-import com.matejdro.bukkit.jail.JailCellCreation;
-import com.matejdro.bukkit.jail.JailLog;
-import com.matejdro.bukkit.jail.JailPrisoner;
-import com.matejdro.bukkit.jail.JailZoneCreation;
-import com.matejdro.bukkit.jail.PrisonerManager;
-import com.matejdro.bukkit.jail.Setting;
-import com.matejdro.bukkit.jail.Settings;
-import com.matejdro.bukkit.jail.Util;
 import com.matejdro.bukkit.jail.commands.JailSetCommand;
 
 @SuppressWarnings("deprecation")
@@ -81,6 +72,10 @@ public class JailPlayerListener implements Listener {
 			if (JailCellCreation.chatmessage(event.getPlayer(), event.getMessage()));
 				event.setCancelled(true);
 		}
+
+        if( JailPlayer.players.containsKey(event.getPlayer().getName())){
+            event.setCancelled(true);
+        }
 	}
 
 	

@@ -19,7 +19,7 @@ public class JailPlayer {
             players.put(jailer.getName(), 0);
         }
         Util.Message(ChatColor.AQUA + "---------- Jail " + target.getName() + " ----------", jailer);
-        Util.Message(ChatColor.GREEN + "How long do you want to jail " + ChatColor.RED + target.getName() + ChatColor.GREEN + " for?", jailer);
+        Util.Message(ChatColor.GREEN + "How long do you want to jail " + ChatColor.RED + target.getName() + ChatColor.GREEN + " for? Type the number of minutes in chat!", jailer);
         Util.Message(ChatColor.AQUA + "-----------------------------------------------", jailer);
     }
 

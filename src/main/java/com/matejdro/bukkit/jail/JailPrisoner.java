@@ -187,7 +187,7 @@ public class JailPrisoner {
 	
 	/**
 	 * Change destination jail zone, when this prisoner is waiting for transfer.
-	 * @param input 
+	 * @param input transfer destination
 	 */
 	public void setTransferDestination(String input)
 	{
