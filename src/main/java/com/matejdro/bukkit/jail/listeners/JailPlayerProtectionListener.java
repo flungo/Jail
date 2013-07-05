@@ -1,5 +1,6 @@
 package com.matejdro.bukkit.jail.listeners;
 
+import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -96,13 +97,13 @@ public class JailPlayerProtectionListener implements Listener {
 				if (jail.getSettings().getInt(Setting.CommandProtectionPenalty) > 0 && prisoner.getRemainingTime() > 0)
 				{
 					
-					Util.Message(jail.getSettings().getString(Setting.MessageForbiddenCommandNoPenalty), event.getPlayer());
+					Util.Message(ChatColor.RED + jail.getSettings().getString(Setting.MessageForbiddenCommandNoPenalty), event.getPlayer());
 					prisoner.setRemainingTime(prisoner.getRemainingTime() + jail.getSettings().getInt(Setting.CommandProtectionPenalty) * 6);
 					InputOutput.UpdatePrisoner(prisoner);
 				}
 				else
 				{
-					Util.Message(jail.getSettings().getString(Setting.MessageForbiddenCommandPenalty), event.getPlayer());
+					Util.Message(ChatColor.RED + jail.getSettings().getString(Setting.MessageForbiddenCommandPenalty), event.getPlayer());
 				}
 				event.setCancelled(true);
 				return;
@@ -163,7 +164,7 @@ public class JailPlayerProtectionListener implements Listener {
 						if (jail.getSettings().getInt(Setting.PlayerMoveProtectionPenalty) > 0  && prisoner.getRemainingTime() > 0)
 						{
 							
-							Util.Message(jail.getSettings().getString(Setting.MessageEscapePenalty), event.getPlayer());
+							Util.Message(ChatColor.RED + jail.getSettings().getString(Setting.MessageEscapePenalty), event.getPlayer());
 							prisoner.setRemainingTime(prisoner.getRemainingTime() + jail.getSettings().getInt(Setting.PlayerMoveProtectionPenalty) * 6);
 							InputOutput.UpdatePrisoner(prisoner);
 						}

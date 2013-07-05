@@ -14,6 +14,7 @@ import java.util.logging.Level;
 import net.milkbowl.vault.permission.Permission;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -27,7 +28,7 @@ public class Util {
     
 	public static void Message(String message, Player player)
 	{
-		player.sendMessage(message);
+		player.sendMessage(ChatColor.GOLD + "[Jail] " + message);
 	}
 	
 	public static void Message(String message, CommandSender sender)

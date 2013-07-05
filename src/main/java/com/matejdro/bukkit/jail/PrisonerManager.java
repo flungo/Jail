@@ -2,6 +2,7 @@ package com.matejdro.bukkit.jail;
 
 import java.util.ArrayList;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Server;
 import org.bukkit.block.Chest;
@@ -186,7 +187,7 @@ public class PrisonerManager {
 	{
 		prisoner.SetBeingReleased(true);
 		JailZone jail = prisoner.getJail();	
-		Util.Message(jail.getSettings().getString(Setting.MessageUnJail), player);
+		Util.Message(ChatColor.GREEN + jail.getSettings().getString(Setting.MessageUnJail), player);
 		
 		if (jail.getSettings().getBoolean(Setting.SpoutChangeSkin))
 			Util.changeSkin(player, null);
