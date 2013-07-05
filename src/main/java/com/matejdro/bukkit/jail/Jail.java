@@ -114,7 +114,7 @@ public class Jail extends JavaPlugin {
 			this.updateChecker = new UpdateChecker(this, "http://dev.bukkit.org/bukkit-plugins/jail/files.rss");
 			if(this.updateChecker.updateNeeded()){
 				updateNeeded = true;
-				getLogger().info("There is an update avalible for Jail. Version " + this.updateChecker.getVersion() + ". Download it at " + this.updateChecker.getLink());
+				getLogger().info("There is an update available for Jail. Version " + this.updateChecker.getVersion() + ". Download it at " + this.updateChecker.getLink());
 			}
 		}
 		
@@ -129,7 +129,7 @@ public class Jail extends JavaPlugin {
 		if(notificationsPlugin == null){
 			getLogger().info("Notifications plugin not installed");
 		}else{
-			getLogger().info("Notifications plugin is installed");
+			getLogger().info("Notifications plugin installed, features added!");
 		}
 		
 		getServer().getPluginManager().registerEvents(blockListener, this);

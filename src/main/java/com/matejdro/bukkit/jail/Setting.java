@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public enum Setting {
-	
+
+    UseNewJailCommand("UseNewJailCommand", false),
 	AllowUpdateNotifications("AllowUpdateNotifications", true),
 	SelectionTool("SelectionTool", 268),
 	ExecutedCommandsOnJail("ExecutedCommandsOnJail", new ArrayList<String>()),
