@@ -5,7 +5,6 @@ import java.util.Arrays;
 
 public enum Setting {
 
-    UseNewJailCommand("UseNewJailCommand", true),
 	AllowUpdateNotifications("AllowUpdateNotifications", true),
 	SelectionTool("SelectionTool", 268),
 	ExecutedCommandsOnJail("ExecutedCommandsOnJail", new ArrayList<String>()),

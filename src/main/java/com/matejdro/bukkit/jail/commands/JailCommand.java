@@ -22,7 +22,6 @@ public class JailCommand extends BaseCommand {
 	@SuppressWarnings("unused")
 	public Boolean run(CommandSender sender, String[] args) {
 
-        if(!Settings.getGlobalBoolean(Setting.UseNewJailCommand)){
             if (args.length < 1)
             {
                 Util.Message("Usage: /jail [Name] (time) (j:Jail name) (c:Cell name) (r:Reason) (m)", sender);
@@ -135,20 +134,6 @@ public class JailCommand extends BaseCommand {
             message = prisoner.parseTags(message);
             Util.Message(message, sender);
             return true;
-        }else{
-           // TODO: Add New Jail Command
-            if(args.length < 1){
-                Util.Message("Usage: /jail <player>", sender);
-            }else {
-                if (Jail.prisoners.containsKey(sender.getName())) {
-                    Util.Message(ChatColor.RED + "That player is already jailed!", sender);
-                } else {
-                    Player player = (Player) sender;
-                    JailPlayer.start(player , Jail.instance.getServer().getPlayer(args[1]));
-                }
-            }
-        }
-		return true;
 	}
 
 }
