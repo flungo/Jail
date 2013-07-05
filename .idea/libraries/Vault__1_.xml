@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Vault (1)">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/git/jailplugin/Jailplugin/Jail/lib/Vault (1).jar!/" />
+      <root url="jar://$USER_HOME$/git/jailplugin/Jailplugin/Jail/lib/WorldEdit.jar!/" />
+      <root url="jar://$USER_HOME$/git/jailplugin/Jailplugin/Jail/lib/Notifications.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/git/jailplugin/Jailplugin/Jail/lib/Notifications.jar!/doc" />
+    </JAVADOC>
+    <SOURCES />
+  </library>
+</component>
