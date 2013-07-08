@@ -60,9 +60,6 @@ public class JailEntityListener implements Listener {
 					plugin.getServer().broadcastMessage(prisoner.parseTags(prisoner.getJail().getSettings().getString(Setting.MessageEscape)));
 					prisoner.delete();
 				}
-					
-				
-					
 			}
 		}
 		

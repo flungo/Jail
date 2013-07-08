@@ -72,10 +72,6 @@ public class JailPlayerListener implements Listener {
 			if (JailCellCreation.chatmessage(event.getPlayer(), event.getMessage()));
 				event.setCancelled(true);
 		}
-
-        if( JailPlayer.players.containsKey(event.getPlayer().getName())){
-            event.setCancelled(true);
-        }
 	}
 
 	

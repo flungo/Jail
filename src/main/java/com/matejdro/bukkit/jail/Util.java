@@ -28,7 +28,7 @@ public class Util {
     
 	public static void Message(String message, Player player)
 	{
-		player.sendMessage(ChatColor.GOLD + "[Jail] " + message);
+		player.sendMessage(message);
 	}
 	
 	public static void Message(String message, CommandSender sender)

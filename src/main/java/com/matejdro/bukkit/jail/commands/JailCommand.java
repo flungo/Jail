@@ -6,7 +6,6 @@ import com.matejdro.bukkit.jail.*;
 import me.muizers.Notifications.Notification;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -22,7 +21,7 @@ public class JailCommand extends BaseCommand {
 	@SuppressWarnings("unused")
 	public Boolean run(CommandSender sender, String[] args) {
 
-            if (args.length < 1)
+            if (args.length < 1 && sender.hasPermission("jail.command.jail"))
             {
                 Util.Message("Usage: /jail [Name] (time) (j:Jail name) (c:Cell name) (r:Reason) (m)", sender);
                 return true;
