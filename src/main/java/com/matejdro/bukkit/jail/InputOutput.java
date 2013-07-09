@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 
 import org.bukkit.GameMode;
@@ -24,6 +25,7 @@ public class InputOutput {
     public static YamlConfiguration jails;
     
     public static HashMap<Integer, String[]> jailStickParameters = new HashMap<Integer, String[]>();
+    private static Map<String, ConfigAccessor> configAccessors = new HashMap<String, ConfigAccessor>();
     
 	public InputOutput()
 	{
@@ -774,6 +776,16 @@ public class InputOutput {
 			Jail.log.log(Level.SEVERE, "[Jail] Error while initializing Metrics - " + e.getMessage());
 			e.printStackTrace();
     	}
+    }
+    
+    public static ConfigAccessor getConfigAccessor(String file) {
+        if (configAccessors.containsKey(file)) {
+            return configAccessors.get(file);
+        } else {
+            ConfigAccessor ca = new ConfigAccessor(Jail.instance, file);
+            configAccessors.put(file, ca);
+            return ca;
+        }
     }
 
 }
