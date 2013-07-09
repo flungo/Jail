@@ -34,6 +34,37 @@ UseBukkitSchedulerTimer: true
 JailCheckPrisonersPerPage: 15
 EnableJailStick: false
 JailStickParameters: 280,5,10,,police;50,5,20,,admin
+JailSticks:
+  280:
+    range: 5
+    time: 10
+    jail: []
+    reason: police
+    requirements:
+      items:
+        - 327
+        - 7
+      health: 0
+      exp: 0
+      money: 0
+    penalties:
+      health: 0
+      exp: 0
+      money: 0
+    take:
+      items:
+        - 7
+    frisk:
+      items:
+        - 327
+  50:
+    range: 5
+    time: 20
+    jail: []
+    reason: admin
+    requirements: []
+    take: []
+    frisk: []
 
 ################################################
 #             Protection Settings              #
