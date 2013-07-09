@@ -44,9 +44,18 @@ JailSticks:
       items:
         - 327
         - 7
+      requireAllItems: false
       health: 0
       exp: 0
       money: 0
+      clothing:
+        helmet: 298
+        chestplte: 299
+        leggings: 300
+        boots: 301
+        dye: 4
+        requireAll: true
+      requireAll: false
     penalties:
       health: 0
       exp: 0
@@ -57,6 +66,12 @@ JailSticks:
     frisk:
       items:
         - 327
+    uniform:
+      helmet: 298
+      chestplte: 299
+      leggings: 300
+      boots: 301
+      dye: 4
   50:
     range: 5
     time: 20
@@ -65,6 +80,7 @@ JailSticks:
     requirements: []
     take: []
     frisk: []
+    uniform: []
 
 ################################################
 #             Protection Settings              #
