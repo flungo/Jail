@@ -18,6 +18,7 @@ import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.block.Sign;
 import org.bukkit.configuration.InvalidConfigurationException;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 public class InputOutput {
     private static Connection connection;
@@ -786,6 +787,10 @@ public class InputOutput {
             configAccessors.put(file, ca);
             return ca;
         }
+    }
+    
+    public static FileConfiguration getGlobalConfig() {
+        return getConfigAccessor("global.yml").getConfig();
     }
 
 }
