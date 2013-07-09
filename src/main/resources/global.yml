@@ -50,7 +50,7 @@ JailSticks:
       money: 0
       clothing:
         helmet: 298
-        chestplte: 299
+        chestplate: 299
         leggings: 300
         boots: 301
         dye: 4
@@ -68,7 +68,7 @@ JailSticks:
         - 327
     uniform:
       helmet: 298
-      chestplte: 299
+      chestplate: 299
       leggings: 300
       boots: 301
       dye: 4
