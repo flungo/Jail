@@ -89,6 +89,8 @@ public class JailStick {
     }
 
     public void setRange(int range) {
+        InputOutput.getGlobalConfig().set("JailSticks." + getId() + ".range", range);
+        InputOutput.saveGlobalConfig();
         this.range = range;
     }
 
@@ -97,6 +99,8 @@ public class JailStick {
     }
 
     public void setTime(int time) {
+        InputOutput.getGlobalConfig().set("JailSticks." + getId() + ".time", time);
+        InputOutput.saveGlobalConfig();
         this.time = time;
     }
 
@@ -105,6 +109,8 @@ public class JailStick {
     }
 
     public void setJail(JailZone jail) {
+        InputOutput.getGlobalConfig().set("JailSticks." + getId() + ".jail", jail.getName());
+        InputOutput.saveGlobalConfig();
         this.jail = jail;
     }
 
@@ -113,6 +119,8 @@ public class JailStick {
     }
 
     public void setReason(String reason) {
+        InputOutput.getGlobalConfig().set("JailSticks." + getId() + ".reason", reason);
+        InputOutput.saveGlobalConfig();
         this.reason = reason;
     }
 
@@ -121,6 +129,8 @@ public class JailStick {
     }
 
     public void setRequiredItems(List<Integer> requiredItems) {
+        InputOutput.getGlobalConfig().set("JailSticks." + getId() + ".required.items", requiredItems);
+        InputOutput.saveGlobalConfig();
         this.requiredItems = requiredItems;
     }
 
@@ -129,6 +139,8 @@ public class JailStick {
     }
 
     public void setRequireAllItems(boolean requireAllItems) {
+        InputOutput.getGlobalConfig().set("JailSticks." + getId() + ".required.requireAllItems", requireAllItems);
+        InputOutput.saveGlobalConfig();
         this.requireAllItems = requireAllItems;
     }
 
@@ -137,6 +149,8 @@ public class JailStick {
     }
 
     public void setRequiredHealth(int requiredHealth) {
+        InputOutput.getGlobalConfig().set("JailSticks." + getId() + ".requirements.health", requiredHealth);
+        InputOutput.saveGlobalConfig();
         this.requiredHealth = requiredHealth;
     }
 
@@ -145,6 +159,8 @@ public class JailStick {
     }
 
     public void setRequiredExp(int requiredExp) {
+        InputOutput.getGlobalConfig().set("JailSticks." + getId() + ".requirements.exp", requiredExp);
+        InputOutput.saveGlobalConfig();
         this.requiredExp = requiredExp;
     }
 
@@ -153,6 +169,8 @@ public class JailStick {
     }
 
     public void setRequiredMoney(int requiredMoney) {
+        InputOutput.getGlobalConfig().set("JailSticks." + getId() + ".requirements.money", requiredMoney);
+        InputOutput.saveGlobalConfig();
         this.requiredMoney = requiredMoney;
     }
 
@@ -161,6 +179,8 @@ public class JailStick {
     }
 
     public void setRequiredHelmet(int requiredHelmet) {
+        InputOutput.getGlobalConfig().set("JailSticks." + getId() + ".requirements.clothing.helmet", requiredHelmet);
+        InputOutput.saveGlobalConfig();
         this.requiredHelmet = requiredHelmet;
     }
 
@@ -169,6 +189,8 @@ public class JailStick {
     }
 
     public void setRequiredChestplate(int requiredChestplate) {
+        InputOutput.getGlobalConfig().set("JailSticks." + getId() + ".requirements.clothing.chestplate", requiredChestplate);
+        InputOutput.saveGlobalConfig();
         this.requiredChestplate = requiredChestplate;
     }
 
@@ -177,6 +199,8 @@ public class JailStick {
     }
 
     public void setRequiredLeggings(int requiredLeggings) {
+        InputOutput.getGlobalConfig().set("JailSticks." + getId() + ".requirements.clothing.leggings", requiredLeggings);
+        InputOutput.saveGlobalConfig();
         this.requiredLeggings = requiredLeggings;
     }
 
@@ -185,6 +209,8 @@ public class JailStick {
     }
 
     public void setRequiredBoots(int requiredBoots) {
+        InputOutput.getGlobalConfig().set("JailSticks." + getId() + ".requirements.clothing.boots", requiredBoots);
+        InputOutput.saveGlobalConfig();
         this.requiredBoots = requiredBoots;
     }
 
@@ -193,6 +219,8 @@ public class JailStick {
     }
 
     public void setRequiredClothingDye(int requiredClothingDye) {
+        InputOutput.getGlobalConfig().set("JailSticks." + getId() + ".requirements.clothing.dye", requiredClothingDye);
+        InputOutput.saveGlobalConfig();
         this.requiredClothingDye = requiredClothingDye;
     }
 
@@ -201,6 +229,8 @@ public class JailStick {
     }
 
     public void setRequireAllClothing(boolean requireAllClothing) {
+        InputOutput.getGlobalConfig().set("JailSticks." + getId() + ".requirements.clothing.requireAll", requireAllClothing);
+        InputOutput.saveGlobalConfig();
         this.requireAllClothing = requireAllClothing;
     }
 
@@ -209,6 +239,8 @@ public class JailStick {
     }
 
     public void setRequireAllRequirements(boolean requireAllRequirements) {
+        InputOutput.getGlobalConfig().set("JailSticks." + getId() + ".requirements.requireAll", requireAllRequirements);
+        InputOutput.saveGlobalConfig();
         this.requireAllRequirements = requireAllRequirements;
     }
 
@@ -217,6 +249,8 @@ public class JailStick {
     }
 
     public void setPenaltyHealth(int penaltyHealth) {
+        InputOutput.getGlobalConfig().set("JailSticks." + getId() + ".penalties.health", penaltyHealth);
+        InputOutput.saveGlobalConfig();
         this.penaltyHealth = penaltyHealth;
     }
 
@@ -225,6 +259,8 @@ public class JailStick {
     }
 
     public void setPenaltyExp(int penaltyExp) {
+        InputOutput.getGlobalConfig().set("JailSticks." + getId() + ".penalties.exp", penaltyExp);
+        InputOutput.saveGlobalConfig();
         this.penaltyExp = penaltyExp;
     }
 
@@ -233,6 +269,8 @@ public class JailStick {
     }
 
     public void setPenaltyMoney(int penaltyMoney) {
+        InputOutput.getGlobalConfig().set("JailSticks." + getId() + ".penalties.money", penaltyHealth);
+        InputOutput.saveGlobalConfig();
         this.penaltyMoney = penaltyMoney;
     }
 
@@ -241,6 +279,8 @@ public class JailStick {
     }
 
     public void setTakeItems(List<Integer> takeItems) {
+        InputOutput.getGlobalConfig().set("JailSticks." + getId() + ".take", takeItems);
+        InputOutput.saveGlobalConfig();
         this.takeItems = takeItems;
     }
 
@@ -249,6 +289,8 @@ public class JailStick {
     }
 
     public void setFriskItems(List<Integer> friskItems) {
+        InputOutput.getGlobalConfig().set("JailSticks." + getId() + ".frisk", friskItems);
+        InputOutput.saveGlobalConfig();
         this.friskItems = friskItems;
     }
 
@@ -257,6 +299,8 @@ public class JailStick {
     }
 
     public void setUniformHelmet(int uniformHelmet) {
+        InputOutput.getGlobalConfig().set("JailSticks." + getId() + ".uniform.helmet", uniformHelmet);
+        InputOutput.saveGlobalConfig();
         this.uniformHelmet = uniformHelmet;
     }
 
@@ -265,6 +309,8 @@ public class JailStick {
     }
 
     public void setUniformChestplate(int uniformChestplate) {
+        InputOutput.getGlobalConfig().set("JailSticks." + getId() + ".uniform.chestplate", uniformChestplate);
+        InputOutput.saveGlobalConfig();
         this.uniformChestplate = uniformChestplate;
     }
 
@@ -273,6 +319,8 @@ public class JailStick {
     }
 
     public void setUniformLeggings(int uniformLeggings) {
+        InputOutput.getGlobalConfig().set("JailSticks." + getId() + ".uniform.leggings", uniformLeggings);
+        InputOutput.saveGlobalConfig();
         this.uniformLeggings = uniformLeggings;
     }
 
@@ -281,6 +329,8 @@ public class JailStick {
     }
 
     public void setUniformBoots(int uniformBoots) {
+        InputOutput.getGlobalConfig().set("JailSticks." + getId() + ".uniform.boots", uniformBoots);
+        InputOutput.saveGlobalConfig();
         this.uniformBoots = uniformBoots;
     }
 
@@ -289,6 +339,8 @@ public class JailStick {
     }
 
     public void setUniformDye(int uniformDye) {
+        InputOutput.getGlobalConfig().set("JailSticks." + getId() + ".uniform.dye", uniformDye);
+        InputOutput.saveGlobalConfig();
         this.uniformDye = uniformDye;
     }
     
@@ -332,7 +384,7 @@ public class JailStick {
     }
     
     public static JailStick getJailStick(Player p) {
-        if (Jail.containsJailStick(p.getItemInHand().getTypeId())) {
+        if (Jail.hasJailStickEnabled(p) && Jail.containsJailStick(p.getItemInHand().getTypeId())) {
             JailStick stick = Jail.getJailStick(p.getItemInHand().getTypeId());
             ItemStack helmet = p.getInventory().getHelmet();
             if (stick.getUniformHelmet() != 0) {
@@ -343,8 +395,8 @@ public class JailStick {
                     return null;
                 }
             }
-            ItemStack chestplate = p.getInventory().getChestplate();
             if (stick.getUniformChestplate()!= 0) {
+                ItemStack chestplate = p.getInventory().getChestplate();
                 if (stick.getUniformChestplate() != chestplate.getTypeId()
                         || ( chestplate.getType() == Material.LEATHER_CHESTPLATE && stick.getUniformDye() >= 0
                         && ((LeatherArmorMeta) chestplate.getItemMeta()).getColor().equals(new Wool(stick.getUniformDye()).getColor()) ) ) {
@@ -352,8 +404,8 @@ public class JailStick {
                     return null;
                 }
             }
-            ItemStack leggings = p.getInventory().getLeggings();
             if (stick.getUniformLeggings()!= 0) {
+                ItemStack leggings = p.getInventory().getLeggings();
                 if (stick.getUniformLeggings() != leggings.getTypeId()
                         || ( leggings.getType() == Material.LEATHER_LEGGINGS && stick.getUniformDye() >= 0
                         && ((LeatherArmorMeta) leggings.getItemMeta()).getColor().equals(new Wool(stick.getUniformDye()).getColor()) ) ) {
@@ -361,8 +413,8 @@ public class JailStick {
                     return null;
                 }
             }
-            ItemStack boots = p.getInventory().getLeggings();
             if (stick.getUniformBoots()!= 0) {
+                ItemStack boots = p.getInventory().getLeggings();
                 if (stick.getUniformBoots() != boots.getTypeId()
                         || ( boots.getType() == Material.LEATHER_BOOTS && stick.getUniformDye() >= 0
                         && ((LeatherArmorMeta) boots.getItemMeta()).getColor().equals(new Wool(stick.getUniformDye()).getColor()) ) ) {
@@ -370,6 +422,8 @@ public class JailStick {
                     return null;
                 }
             }
+            
+            return stick;
         } else {
             // Return null and do nothing, the player isn't holding a Jail Stick
             return null;

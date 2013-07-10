@@ -792,5 +792,9 @@ public class InputOutput {
     public static FileConfiguration getGlobalConfig() {
         return getConfigAccessor("global.yml").getConfig();
     }
+    
+    public static void saveGlobalConfig() {
+        getConfigAccessor("golbal.yml").saveConfig();
+    }
 
 }
