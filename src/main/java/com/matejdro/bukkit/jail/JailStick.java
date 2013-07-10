@@ -537,9 +537,24 @@ public class JailStick {
     }
 
     private void imposePenalty(Player p) {
+        // Take health from player
+        p.setHealth(p.getHealth() - penaltyHealth);
+        // Take exp from player
+        p.setExp(p.getExp() - penaltyExp);
+        // Take money from player
+        // TODO: implement vault economy
     }
 
     public void invokeActions(Player holder, Player victim) {
+        for (int itemId : takeItems) {
+            victim.getInventory().remove(itemId);
+        }
+        for (int itemId : friskItems) {
+            for (Integer slotId : victim.getInventory().all(itemId).keySet()) {
+                holder.getInventory().addItem(victim.getInventory().getItem(slotId));
+            }
+            victim.getInventory().remove(itemId);
+        }
     }
 
     public static JailStick loadJailStick(int itemId) {
