@@ -15,6 +15,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.material.Wool;
+import org.bukkit.permissions.PermissionDefault;
 
 /**
  *
@@ -384,7 +385,8 @@ public class JailStick {
     }
     
     public static JailStick getJailStick(Player p) {
-        if (Jail.hasJailStickEnabled(p) && Jail.containsJailStick(p.getItemInHand().getTypeId())) {
+        // Check the player has jailstick enabled, if they are holding a valid jailstick and that they have permission to use that jailstick.
+        if (Jail.hasJailStickEnabled(p) && Jail.containsJailStick(p.getItemInHand().getTypeId()) && Util.permission(p, "jail.usejailstick." + p.getItemInHand().getTypeId() , PermissionDefault.OP)) {
             JailStick stick = Jail.getJailStick(p.getItemInHand().getTypeId());
             ItemStack helmet = p.getInventory().getHelmet();
             if (stick.getUniformHelmet() != 0) {
@@ -422,7 +424,7 @@ public class JailStick {
                     return null;
                 }
             }
-            
+            // The player passed all the conditions to use their jailstick, return the jailstick object
             return stick;
         } else {
             // Return null and do nothing, the player isn't holding a Jail Stick
