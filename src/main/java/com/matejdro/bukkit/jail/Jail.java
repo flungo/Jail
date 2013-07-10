@@ -251,5 +251,22 @@ public class Jail extends JavaPlugin {
         public static JailStick addJailStick(JailStick js) {
             return jailSticks.put(js.getId(), js);
         }
+        
+        public static JailStick getJailStick(int itemId) {
+            return jailSticks.get(itemId);
+        }
+        
+        public static boolean containsJailStick(int itemId) {
+            return jailSticks.containsKey(itemId);
+        }
+        
+        public static boolean hasJailStickEnabled(Player p) {
+            if (jailStickToggle.containsKey(p)) {
+                return jailStickToggle.get(p);
+            } else {
+                jailStickToggle.put(p, false);
+                return false;
+            }
+        }
 
 }

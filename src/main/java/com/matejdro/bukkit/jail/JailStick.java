@@ -8,7 +8,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.bukkit.DyeColor;
+import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.LeatherArmorMeta;
+import org.bukkit.material.Wool;
 
 /**
  *
@@ -322,6 +328,51 @@ public class JailStick {
         ConfigurationSection jailSticksSection = InputOutput.getGlobalConfig().getConfigurationSection("JailSticks");
         for (String stick : jailSticksSection.getKeys(false)) {
             Jail.addJailStick(loadJailStick(Integer.parseInt(stick)));
+        }
+    }
+    
+    public static JailStick getJailStick(Player p) {
+        if (Jail.containsJailStick(p.getItemInHand().getTypeId())) {
+            JailStick stick = Jail.getJailStick(p.getItemInHand().getTypeId());
+            ItemStack helmet = p.getInventory().getHelmet();
+            if (stick.getUniformHelmet() != 0) {
+                if (stick.getUniformHelmet() != helmet.getTypeId()
+                        || ( helmet.getType() == Material.LEATHER_HELMET && stick.getUniformDye() >= 0
+                        && ((LeatherArmorMeta) helmet.getItemMeta()).getColor().equals(new Wool(stick.getUniformDye()).getColor()) ) ) {
+                    p.sendMessage("You are not wearing the correct helmet to use your current item as a jailstick.");
+                    return null;
+                }
+            }
+            ItemStack chestplate = p.getInventory().getChestplate();
+            if (stick.getUniformChestplate()!= 0) {
+                if (stick.getUniformChestplate() != chestplate.getTypeId()
+                        || ( chestplate.getType() == Material.LEATHER_CHESTPLATE && stick.getUniformDye() >= 0
+                        && ((LeatherArmorMeta) chestplate.getItemMeta()).getColor().equals(new Wool(stick.getUniformDye()).getColor()) ) ) {
+                    p.sendMessage("You are not wearing the correct chestplate to use your current item as a jailstick.");
+                    return null;
+                }
+            }
+            ItemStack leggings = p.getInventory().getLeggings();
+            if (stick.getUniformLeggings()!= 0) {
+                if (stick.getUniformLeggings() != leggings.getTypeId()
+                        || ( leggings.getType() == Material.LEATHER_LEGGINGS && stick.getUniformDye() >= 0
+                        && ((LeatherArmorMeta) leggings.getItemMeta()).getColor().equals(new Wool(stick.getUniformDye()).getColor()) ) ) {
+                    p.sendMessage("You are not wearing the correct leggings to use your current item as a jailstick.");
+                    return null;
+                }
+            }
+            ItemStack boots = p.getInventory().getLeggings();
+            if (stick.getUniformBoots()!= 0) {
+                if (stick.getUniformBoots() != boots.getTypeId()
+                        || ( boots.getType() == Material.LEATHER_BOOTS && stick.getUniformDye() >= 0
+                        && ((LeatherArmorMeta) boots.getItemMeta()).getColor().equals(new Wool(stick.getUniformDye()).getColor()) ) ) {
+                    p.sendMessage("You are not wearing the correct boots to use your current item as a jailstick.");
+                    return null;
+                }
+            }
+        } else {
+            // Return null and do nothing, the player isn't holding a Jail Stick
+            return null;
         }
     }
     
