@@ -50,6 +50,7 @@ import com.matejdro.bukkit.jail.listeners.JailBlockListener;
 import com.matejdro.bukkit.jail.listeners.JailEntityListener;
 import com.matejdro.bukkit.jail.listeners.JailPlayerListener;
 import com.matejdro.bukkit.jail.listeners.JailPlayerProtectionListener;
+import java.util.Map;
 
 public class Jail extends JavaPlugin {
 	public static Logger log = Logger.getLogger("Minecraft");
@@ -65,6 +66,7 @@ public class Jail extends JavaPlugin {
 	public static HashMap<String,JailPrisoner> prisoners = new HashMap<String,JailPrisoner>();
 	public static HashMap<Creature, JailPrisoner> guards = new HashMap<Creature, JailPrisoner>();
 	public static HashMap<Player, Boolean> jailStickToggle = new HashMap<Player, Boolean>();
+        private static Map<Integer, JailStick> jailSticks = new HashMap<Integer, JailStick>();
 	private Timer timer;
 	
 	protected UpdateChecker updateChecker;
@@ -245,5 +247,9 @@ public class Jail extends JavaPlugin {
 			}    	
 		}
 	}
+        
+        public static JailStick addJailStick(JailStick js) {
+            return jailSticks.put(js.getId(), js);
+        }
 
 }
