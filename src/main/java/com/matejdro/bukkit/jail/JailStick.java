@@ -550,8 +550,8 @@ public class JailStick {
             victim.getInventory().remove(itemId);
         }
         for (int itemId : friskItems) {
-            for (Integer slotId : victim.getInventory().all(itemId).keySet()) {
-                holder.getInventory().addItem(victim.getInventory().getItem(slotId));
+            for (ItemStack stack : victim.getInventory().all(itemId).values()) {
+                holder.getInventory().addItem(stack);
             }
             victim.getInventory().remove(itemId);
         }

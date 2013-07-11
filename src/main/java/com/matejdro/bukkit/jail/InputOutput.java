@@ -25,7 +25,6 @@ public class InputOutput {
     public static YamlConfiguration global;
     public static YamlConfiguration jails;
     
-    public static HashMap<Integer, String[]> jailStickParameters = new HashMap<Integer, String[]>();
     private static Map<String, ConfigAccessor> configAccessors = new HashMap<String, ConfigAccessor>();
     
 	public InputOutput()
@@ -100,7 +99,7 @@ public class InputOutput {
 	    	{
 	    		if (global.get(s.getString()) == null) global.set(s.getString(), s.getDefault());
 	    	}
-	    	loadJailStickParameters();
+	    	JailStick.loadJailSticks();
 	    	
 	    	global.save(new File(Jail.instance.getDataFolder(),"global.yml"));
 
@@ -114,15 +113,6 @@ public class InputOutput {
 			e.printStackTrace();
 		}
 	}
-    
-    public void loadJailStickParameters()
-    {
-    	for (String i : Settings.getGlobalString(Setting.JailStickParameters).split(";"))
-    	{
-    		jailStickParameters.put(Integer.parseInt(i.substring(0, i.indexOf(","))), i.split(","));
-    	}
-    		
-    }
     
     public void LoadJails()
     {
