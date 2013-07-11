@@ -411,20 +411,19 @@ public class JailStick {
             }
         }
         // If money is specified, check if they have the required money
-        /* Requires vault economy to be implemented:
-         if (requiredMoney > 0) {
-         if ( < requiredMoney) {
-         // If the victim is too wounded they have failed the requirements
-         holder.sendMessage(ChatColor. RED + "Could not jail " + victim.getName() + ": player did not have enough exp.");
-         imposePenalty(holder);
-         return false;
-         } else {
-         // If the player needs to only meet one requirement and they have done so return true
-         if (!requireAllRequirements) {
-         return true;
-         }
-         }
-         } */
+        if (Util.economy != null && requiredMoney > 0) {
+            if (!Util.economy.has(victim.getName(), requiredMoney)) {
+                // If the victim is too wounded they have failed the requirements
+                holder.sendMessage(ChatColor.RED + "Could not jail " + victim.getName() + ": player did not have enough exp.");
+                imposePenalty(holder);
+                return false;
+            } else {
+                // If the player needs to only meet one requirement and they have done so return true
+                if (!requireAllRequirements) {
+                    return true;
+                }
+            }
+        }
         boolean hasClothing = false;
         // If a helmet is specified, check if they have the required helmet
         if (requiredHelmet > 0) {
@@ -542,7 +541,7 @@ public class JailStick {
         // Take exp from player
         p.setExp(p.getExp() - penaltyExp);
         // Take money from player
-        // TODO: implement vault economy
+        Util.economy.withdrawPlayer(p.getName(), penaltyMoney);
     }
 
     public void invokeActions(Player holder, Player victim) {

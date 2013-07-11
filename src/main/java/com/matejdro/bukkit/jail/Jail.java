@@ -125,6 +125,8 @@ public class Jail extends JavaPlugin {
 		IO.LoadJails();
 		IO.LoadPrisoners();
 		IO.LoadCells();
+                
+                Util.setupEconomy();
 		
 		notificationsPlugin = (Notifications) getServer().getPluginManager().getPlugin("Notifications");
 		
