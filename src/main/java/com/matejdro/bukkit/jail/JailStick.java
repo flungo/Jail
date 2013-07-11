@@ -599,7 +599,7 @@ public class JailStick {
             if (stick.getUniformHelmet() > 0) {
                 ItemStack helmet = p.getInventory().getHelmet();
                 // If a helmet is required, fail if they are not wearing them
-                if (stick.getUniformHelmet() != helmet.getTypeId()
+                if (helmet == null || stick.getUniformHelmet() != helmet.getTypeId()
                         // or if the helmet is leather and not of the correct dye color (if required)
                         || (helmet.getType() == Material.LEATHER_HELMET && stick.getUniformDye() >= 0
                         && !((LeatherArmorMeta) helmet.getItemMeta()).getColor().equals(new Wool(stick.getUniformDye()).getColor()))) {
@@ -611,7 +611,7 @@ public class JailStick {
             if (stick.getUniformChestplate() > 0) {
                 ItemStack chestplate = p.getInventory().getChestplate();
                 // If a chestplate is required, fail if they are not wearing them
-                if (stick.getUniformChestplate() != chestplate.getTypeId()
+                if (chestplate == null || stick.getUniformChestplate() != chestplate.getTypeId()
                         // or if the chestpkate is leather and not of the correct dye color (if required)
                         || (chestplate.getType() == Material.LEATHER_CHESTPLATE && stick.getUniformDye() >= 0
                         && ((LeatherArmorMeta) chestplate.getItemMeta()).getColor().equals(new Wool(stick.getUniformDye()).getColor()))) {
@@ -623,7 +623,7 @@ public class JailStick {
             if (stick.getUniformLeggings() > 0) {
                 ItemStack leggings = p.getInventory().getLeggings();
                 // If leggings are required, fail if they are not wearing them
-                if (stick.getUniformLeggings() != leggings.getTypeId()
+                if (leggings == null || stick.getUniformLeggings() != leggings.getTypeId()
                         // or if the leggings are leather and not of the correct dye color (if required)
                         || (leggings.getType() == Material.LEATHER_LEGGINGS && stick.getUniformDye() >= 0
                         && ((LeatherArmorMeta) leggings.getItemMeta()).getColor().equals(new Wool(stick.getUniformDye()).getColor()))) {
@@ -635,7 +635,7 @@ public class JailStick {
             if (stick.getUniformBoots() > 0) {
                 ItemStack boots = p.getInventory().getLeggings();
                 // If boots are required, fail if they are not wearing them
-                if (stick.getUniformBoots() != boots.getTypeId()
+                if (boots == null || stick.getUniformBoots() != boots.getTypeId()
                         // or if the boots are leather and not of the correct dye color (if required)
                         || (boots.getType() == Material.LEATHER_BOOTS && stick.getUniformDye() >= 0
                         && ((LeatherArmorMeta) boots.getItemMeta()).getColor().equals(new Wool(stick.getUniformDye()).getColor()))) {
