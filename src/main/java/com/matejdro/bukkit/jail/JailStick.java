@@ -2,6 +2,8 @@ package com.matejdro.bukkit.jail;
 
 import java.util.List;
 import org.bukkit.ChatColor;
+import org.bukkit.Color;
+import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
@@ -420,14 +422,18 @@ public class JailStick {
             }
         }
         boolean hasClothing = false;
+		Color uniformColor = null;
+		if (requiredClothingDye > -1 && requiredClothingDye < DyeColor.values().length) {
+			uniformColor = DyeColor.values()[requiredClothingDye].getColor();
+		}
         // If a helmet is specified, check if they have the required helmet
         if (requiredHelmet > 0) {
             ItemStack helmet = victim.getInventory().getHelmet();
             // If a helmet is required, fail if they are not wearing them
-            if (requiredHelmet != helmet.getTypeId()
+            if (helmet == null || requiredHelmet != helmet.getTypeId()
                     // or if the helmet is leather and not of the correct dye color (if required)
-                    || (helmet.getType() == Material.LEATHER_HELMET && requiredClothingDye >= 0
-                    && !((LeatherArmorMeta) helmet.getItemMeta()).getColor().equals(new Wool(requiredClothingDye).getColor()))) {
+                    || (helmet.getType() == Material.LEATHER_HELMET && uniformColor != null
+                    && !((LeatherArmorMeta) helmet.getItemMeta()).getColor().equals(uniformColor))) {
                 if (requireAllClothing) {
                     // If the victim is not wearing the required helmet and they require all clothing they have failed the requirements
                     holder.sendMessage(ChatColor.RED + "Could not jail " + victim.getName() + ": player was not wearing the correct helmet");
@@ -449,10 +455,10 @@ public class JailStick {
         if (!hasClothing && requiredChestplate > 0) {
             ItemStack chestplate = victim.getInventory().getHelmet();
             // If a chestplate is required, fail if they are not wearing them
-            if (requiredChestplate != chestplate.getTypeId()
+            if (chestplate == null || requiredChestplate != chestplate.getTypeId()
                     // or if the chestplate is leather and not of the correct dye color (if required)
-                    || (chestplate.getType() == Material.LEATHER_HELMET && requiredClothingDye >= 0
-                    && !((LeatherArmorMeta) chestplate.getItemMeta()).getColor().equals(new Wool(requiredClothingDye).getColor()))) {
+                    || (chestplate.getType() == Material.LEATHER_HELMET && uniformColor != null
+                    && !((LeatherArmorMeta) chestplate.getItemMeta()).getColor().equals(uniformColor))) {
                 if (requireAllClothing) {
                     // If the victim is not wearing the required chestplate and they require all clothing they have failed the requirements
                     holder.sendMessage(ChatColor.RED + "Could not jail " + victim.getName() + ": player was not wearing the correct chestplate");
@@ -474,10 +480,10 @@ public class JailStick {
         if (!hasClothing && requiredLeggings > 0) {
             ItemStack leggings = victim.getInventory().getLeggings();
             // If leggings are required, fail if they are not wearing them
-            if (requiredLeggings != leggings.getTypeId()
+            if (leggings == null || requiredLeggings != leggings.getTypeId()
                     // or if the leggings are leather and not of the correct dye color (if required)
-                    || (leggings.getType() == Material.LEATHER_HELMET && requiredClothingDye >= 0
-                    && !((LeatherArmorMeta) leggings.getItemMeta()).getColor().equals(new Wool(requiredClothingDye).getColor()))) {
+                    || (leggings.getType() == Material.LEATHER_HELMET && uniformColor != null
+                    && !((LeatherArmorMeta) leggings.getItemMeta()).getColor().equals(uniformColor))) {
                 if (requireAllClothing) {
                     // If the victim is not wearing the required leggings and they require all clothing they have failed the requirements
                     holder.sendMessage(ChatColor.RED + "Could not jail " + victim.getName() + ": player was not wearing the correct leggings");
@@ -499,10 +505,10 @@ public class JailStick {
         if (!hasClothing && requiredBoots > 0) {
             ItemStack boots = victim.getInventory().getBoots();
             // If boots are required, fail if they are not wearing them
-            if (requiredBoots != boots.getTypeId()
+            if (boots == null || requiredBoots != boots.getTypeId()
                     // or if the boots are leather and not of the correct dye color (if required)
-                    || (boots.getType() == Material.LEATHER_HELMET && requiredClothingDye >= 0
-                    && !((LeatherArmorMeta) boots.getItemMeta()).getColor().equals(new Wool(requiredClothingDye).getColor()))) {
+                    || (boots.getType() == Material.LEATHER_HELMET && uniformColor != null
+                    && !((LeatherArmorMeta) boots.getItemMeta()).getColor().equals(uniformColor))) {
                 if (requireAllClothing) {
                     // If the victim is not wearing the required boots and they require all clothing they have failed the requirements
                     holder.sendMessage(ChatColor.RED + "Could not jail " + victim.getName() + ": player was not wearing the correct boots");
