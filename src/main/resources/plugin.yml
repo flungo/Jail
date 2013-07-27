@@ -1,4 +1,4 @@
-name: Jail+
+name: JailPlus
 main: com.matejdro.bukkit.jail.Jail
 version: 1.0.0
 description: Ban too harsh? Kick/mute/whatever not enough? Jail bad players!
