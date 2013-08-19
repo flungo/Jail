@@ -29,6 +29,7 @@ import com.matejdro.bukkit.jail.commands.JailCreateWeCommand;
 import com.matejdro.bukkit.jail.commands.JailDeleteCellCommand;
 import com.matejdro.bukkit.jail.commands.JailDeleteCellsCommand;
 import com.matejdro.bukkit.jail.commands.JailDeleteCommand;
+import com.matejdro.bukkit.jail.commands.JailHandcuffCommand;
 import com.matejdro.bukkit.jail.commands.JailListCellsCommand;
 import com.matejdro.bukkit.jail.commands.JailListCommand;
 import com.matejdro.bukkit.jail.commands.JailMuteCommand;
@@ -184,6 +185,7 @@ public class Jail extends JavaPlugin {
 		commands.put("jailreload", new JailReloadCommand());
 		commands.put("jailrecord", new JailRecordCommand());
 		commands.put("votejail", new JailVoteCommand());
+		commands.put("handcuff", new JailHandcuffCommand());
 
 		IO.initMetrics();
 
