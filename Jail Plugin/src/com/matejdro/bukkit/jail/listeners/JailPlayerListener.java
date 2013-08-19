@@ -71,6 +71,7 @@ public class JailPlayerListener implements Listener {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@EventHandler()
 	public void onPlayerChat(PlayerChatEvent event) {
 		if ( JailCellCreation.players.containsKey(event.getPlayer().getName()))
@@ -79,7 +80,7 @@ public class JailPlayerListener implements Listener {
 				event.setCancelled(true);
 		}
 
-        for(String word : (List <String>) Settings.getGlobalList(Setting.BannedWords)){
+        for(String word : (List<String>) Settings.getGlobalList(Setting.BannedWords)){
             if(event.getMessage().toLowerCase().contains(" " + word + " ") && Settings.getGlobalBoolean(Setting.EnableJailSwear)){
                 event.setCancelled(true);
                 JailPrisoner prisoner = new JailPrisoner(event.getPlayer().getName(), Settings.getGlobalInt(Setting.JailSwearTime) * 6, "", "", false, "", "Swearing", true, "", "", "", event.getPlayer().getGameMode());
@@ -102,7 +103,11 @@ public class JailPlayerListener implements Listener {
 		 if (Jail.prisoners.containsKey(event.getPlayer().getName().toLowerCase()))
 		 {
 			 JailPrisoner prisoner = Jail.prisoners.get(event.getPlayer().getName().toLowerCase());
-			 event.getPlayer().teleport(prisoner.getCell().getTeleportLocation());
+			 if(prisoner != null){
+				 event.getPlayer().teleport(prisoner.getCell().getTeleportLocation());
+			 }else{
+				 Util.debug("Prisoner is null for some reason!");
+			 }
 			 
 			 if (prisoner.offlinePending())
 			 {

@@ -14,7 +14,6 @@ import java.util.logging.Level;
 import net.milkbowl.vault.permission.Permission;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
