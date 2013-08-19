@@ -2,6 +2,7 @@ package com.matejdro.bukkit.jail.listeners;
 
 import com.matejdro.bukkit.jail.*;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -14,8 +15,6 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.permissions.PermissionDefault;
 
 import com.matejdro.bukkit.jail.commands.JailSetCommand;
-
-import java.util.List;
 
 @SuppressWarnings("deprecation")
 public class JailPlayerListener implements Listener {
@@ -71,7 +70,6 @@ public class JailPlayerListener implements Listener {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	@EventHandler()
 	public void onPlayerChat(PlayerChatEvent event) {
 		if ( JailCellCreation.players.containsKey(event.getPlayer().getName()))
@@ -80,7 +78,8 @@ public class JailPlayerListener implements Listener {
 				event.setCancelled(true);
 		}
 
-        for(String word : (List<String>) Settings.getGlobalList(Setting.BannedWords)){
+        for(Object o : Settings.getGlobalList(Setting.BannedWords)){
+        	String word = (String) o;
             if(event.getMessage().toLowerCase().contains(" " + word + " ") && Settings.getGlobalBoolean(Setting.EnableJailSwear)){
                 event.setCancelled(true);
                 JailPrisoner prisoner = new JailPrisoner(event.getPlayer().getName(), Settings.getGlobalInt(Setting.JailSwearTime) * 6, "", "", false, "", "Swearing", true, "", "", "", event.getPlayer().getGameMode());
@@ -104,10 +103,14 @@ public class JailPlayerListener implements Listener {
 		 {
 			 JailPrisoner prisoner = Jail.prisoners.get(event.getPlayer().getName().toLowerCase());
 			 if(prisoner != null){
+				 if(prisoner.getCell() == null){
+					 JailZone jail = JailZoneManager.findNearestJail(event.getPlayer().getLocation());
+					 prisoner.setCell(jail.getNearestCell(event.getPlayer().getLocation()));
+				 }
+				 
 				 event.getPlayer().teleport(prisoner.getCell().getTeleportLocation());
-			 }else{
-				 Util.debug("Prisoner is null for some reason!");
-			 }
+				 event.getPlayer().setGameMode(GameMode.SURVIVAL);
+		}
 			 
 			 if (prisoner.offlinePending())
 			 {
