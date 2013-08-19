@@ -44,7 +44,7 @@ public class JailLog {
             Date date = new Date();
             
             if(player != null){
-            	pw.println("[" + dateFormat.format(date) + "] " + player.getName() + " was jailed for " + time + " minutes by " + sender +". Reason: " + reason);
+            	pw.println("[" + dateFormat.format(date) + "] " + player.getName() + " for " + time + " minutes by " + sender +". Reason: " + reason);
             }else{
             	pw.println("[" + dateFormat.format(date) + "] " + name + " was jailed for " + time + " minutes by " + sender +". Reason: " + reason);
             }

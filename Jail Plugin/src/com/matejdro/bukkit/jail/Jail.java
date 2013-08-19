@@ -79,6 +79,8 @@ public class Jail extends JavaPlugin {
 
     private HashMap<String, BaseCommand> commands = new HashMap<String, BaseCommand>();
 
+    public ArrayList<String> handcuffed = new ArrayList<String>();
+    
     public ArrayList<Material> helmets = new ArrayList<Material>();
 	public ArrayList<Material> chestPlates = new ArrayList<Material>();
 	public ArrayList<Material> leggings = new ArrayList<Material>();

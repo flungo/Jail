@@ -61,7 +61,7 @@ public class JailPlayerProtectionListener implements Listener {
 		JailPrisoner prisoner = Jail.prisoners.get(event.getPlayer().getName().toLowerCase());
 		JailZone jail = prisoner != null ? prisoner.getJail() : null;
 
-		if (prisoner != null)
+		if (prisoner != null && jail != null)
 		{			
 			boolean whitelisted = false;
 
@@ -183,6 +183,10 @@ public class JailPlayerProtectionListener implements Listener {
 						prisoner.killGuards();
 				}
 			}
+		 
+		 if(Jail.instance.handcuffed.contains(event.getPlayer().getName())){
+			event.getPlayer().teleport(event.getPlayer().getLocation());
+		 }
 				
 	 }
 	 
