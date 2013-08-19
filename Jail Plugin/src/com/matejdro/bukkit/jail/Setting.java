@@ -88,6 +88,7 @@ public enum Setting {
 	MessageJailReason("Messages.MessageJailReason", "You have been jailed! Reason: <Reason>"),
 	MessageUnJail("Messages.MessageUnJail", "You have been released! Please respect server rules."),
 	MessagePlayerNotJailed("Messages.PlayerNotJailed", "That player is not jailed!"),
+	MessagePlayerAlreadyJailed("Messages.PlayerAlreadyJailed", "That player is already jailed!"),
 	MessageYouNotJailed("Messages.MessageYouNotJailed", "You are not jailed!"),
 	MessageBlockDestroyedNoPenalty("Messages.BlockDestroyedNoPenalty", "Do not destroy The Jail!"),
 	MessageBlockDestroyedPenalty("Messages.BlockDestroyedPenalty", "Do not destroy The Jail! You have just earned additional 15 minutes in jail!"),

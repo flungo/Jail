@@ -95,10 +95,15 @@ public class JailCommand extends BaseCommand {
                 Util.Message(Settings.getGlobalString(Setting.MessageNeverOnThisServer).replace("<Player>", playerName), sender);
                 return true;
             }
+            
+            if(Jail.prisoners.containsKey(playerName)){
+            	Util.Message(Settings.getGlobalString(Setting.MessagePlayerAlreadyJailed), sender);
+            	return true;
+            }
+            
             else if (player != null) playerName = player.getName().toLowerCase();
 
                 JailPrisoner prisoner;
-
                 if(player != null){
                     prisoner = new JailPrisoner(playerName, time * 6, jailname, cellname, false, "", reason, muted, "", sender instanceof Player ? ((Player) sender).getName() : "console", "", player.getGameMode());
                     PrisonerManager.PrepareJail(prisoner, player);
