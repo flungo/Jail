@@ -13,3 +13,4 @@ Features
 * Jailing without commands via item
 * Supports escaping for role play servers.
 * Allows players to vote a player to be jailed
+* Allows players to handcuff other players, stopping them from being able to move
