@@ -127,7 +127,7 @@ public class PrisonerManager {
 		
 		if (jail.getSettings().getBoolean(Setting.StoreInventory)) 
 		{
-			prisoner.storeInventory(player.getInventory());
+			prisoner.storeInventory(player.getName(), player.getInventory());
 			for (int i = 0;i<40;i++)
 			{
 				player.getInventory().clear(i);
@@ -367,7 +367,7 @@ public class PrisonerManager {
 		
 		if (jail.getSettings().getBoolean(Setting.StoreInventory)) 
 		{
-			prisoner.storeInventory(player.getInventory());
+			prisoner.storeInventory(player.getName(), player.getInventory());
 			player.getInventory().clear();
 		}
 		

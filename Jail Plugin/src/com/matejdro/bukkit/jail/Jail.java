@@ -15,6 +15,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Creature;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -64,6 +65,7 @@ public class Jail extends JavaPlugin {
     public Notifications notificationsPlugin;
     public static HashMap<String,JailZone> zones = new HashMap<String,JailZone>();
     public static HashMap<String,JailPrisoner> prisoners = new HashMap<String,JailPrisoner>();
+    public static HashMap<String, ArrayList<ItemStack>> prisonerInventories = new HashMap<String, ArrayList<ItemStack>>();
     public static HashMap<Creature, JailPrisoner> guards = new HashMap<Creature, JailPrisoner>();
     public static HashMap<Player, Boolean> jailStickToggle = new HashMap<Player, Boolean>();
     private Timer timer;

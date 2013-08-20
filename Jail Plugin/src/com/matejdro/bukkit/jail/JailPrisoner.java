@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map.Entry;
 import java.util.Random;
 
 import org.bukkit.GameMode;
@@ -13,14 +12,12 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.Sign;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Creature;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
-import org.bukkit.inventory.meta.ItemMeta;
 
 
 /**
@@ -39,7 +36,6 @@ public class JailPrisoner {
 	private JailCell cell;
 	private String inventory = "";
 	private GameMode previousGameMode;
-	private ArrayList<ItemMeta> itemMetas = new ArrayList<ItemMeta>();
 	private String jailer = "";
 	private HashSet<Creature> guards = new HashSet<Creature>();
 	private HashSet<LivingEntity> guardTargets = new HashSet<LivingEntity>();
@@ -481,7 +477,7 @@ public class JailPrisoner {
 	 * @param location Spawning location
 	 * @param player Player, associated with this JailPrisoner
 	 */
-	@SuppressWarnings({ "unchecked", "deprecation" })
+	@SuppressWarnings({ "unchecked"})
 	public void spawnGuards(int num, Location location, Player player)
 	{
 		List<BlockFace> checkedCorners = new ArrayList<BlockFace>();					
@@ -538,7 +534,7 @@ public class JailPrisoner {
 			
 			guardTargets.add(player);
 			
-			guard.setHealth(health);
+			guard.setHealth((float) health);
 			
 			guard.setTarget(player);
 						
@@ -563,27 +559,16 @@ public class JailPrisoner {
 	 * Converts specified inventory into inventory string and stores it. Previous inventory string will be deleted. 
 	 * @param playerinv inventory that will be stored
 	 */
-	public void storeInventory(PlayerInventory playerinv)
+	public void storeInventory(String name, PlayerInventory playerinv)
 	{
-		String inv = "";
-		ArrayList<ItemMeta> itemMeta = new ArrayList<ItemMeta>();
-		
-		for (int i = 0;i<40;i++)
-		{
-			ItemStack item = playerinv.getItem(i);
-			if (item == null || item.getType() == Material.AIR) continue;
-			
-			String enchantString = "";
-			for (Entry<Enchantment, Integer> e : item.getEnchantments().entrySet())
-				enchantString += String.valueOf(e.getKey().getId()) + ":" + String.valueOf(e.getValue()) + "*";
-			if (enchantString.length() > 1) enchantString = enchantString.substring(0, enchantString.length() - 1);
-			
-			itemMeta.add(item.getItemMeta());
-					
-			inv += String.valueOf(item.getTypeId()) + "," + String.valueOf(item.getAmount()) + "," +String.valueOf(item.getDurability()) + "," + enchantString + ";";
+		for(int i=0; i < playerinv.getSize(); i++){
+			if(playerinv.getItem(i) != null){
+				if(!Jail.prisonerInventories.containsKey(name)){
+					Jail.prisonerInventories.put(name, new ArrayList<ItemStack>());
+				}
+				Jail.prisonerInventories.get(name).add(playerinv.getItem(i));
+			}
 		}
-		inventory = inv;
-		itemMetas = itemMeta;
 		InputOutput.UpdatePrisoner(this);
 	}
 	
@@ -593,37 +578,14 @@ public class JailPrisoner {
 	 */
 	public void restoreInventory(Player player)
 	{
-		if (inventory == null) return;
-		String[] inv = inventory.split(";");
-		int id = 0;
-		for (String i : inv)
-		{
-			if (i == null || i.trim().equals("")) return;
-			String[] items = i.split(",");
-			ItemStack item = new ItemStack(Integer.parseInt(items[0]),Integer.parseInt(items[1]));
-			item.setDurability(Short.parseShort(items[2]));
-			if(itemMetas.size() > 0){
-				item.setItemMeta(itemMetas.get(id));
-			}else{
-				Jail.instance.getLogger().info("Could not find item Meta Data for " + player.getName());
-			}
-			if (items.length > 3 && items[3].contains(":"))
-			{
-				String[] enchantments = items[3].split("\\*");
-				for (String e : enchantments)
-				{
-					item.addUnsafeEnchantment(Enchantment.getById(Integer.parseInt(e.split(":")[0])), Integer.parseInt(e.split(":")[1]));
-				}
-			}
-			
-			if (player.getInventory().firstEmpty() == -1)
-				player.getWorld().dropItem(player.getLocation(), item);
-			else
+		if(Jail.prisonerInventories.containsKey(player.getName())){
+			for(ItemStack item: Jail.prisonerInventories.get(player.getName())){
 				player.getInventory().addItem(item);
-			id++;
+			}
+			Jail.prisonerInventories.remove(player.getName());
+		}else{
+			Util.debug("Cant restore inventory of player!");
 		}
-		inventory = "";
-		id = 0;
 		InputOutput.UpdatePrisoner(this);
 	}
 	
@@ -637,7 +599,7 @@ public class JailPrisoner {
 			for (Sign sign : cell.getSigns())
 			{
 				String set = getJail().getSettings().getString(Setting.SignText) ;
-				set = set.replaceAll("\\&([0-9abcdef])", "�$1");
+				set = set.replaceAll("\\&([0-9abcdef])", "���$1");
 				String[] lines = set.split("\\[NEWLINE\\]");
 				int max = lines.length;
 				if (max > 4) max = 4;
