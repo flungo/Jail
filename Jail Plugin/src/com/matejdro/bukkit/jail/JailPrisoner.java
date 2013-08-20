@@ -573,7 +573,7 @@ public class JailPrisoner {
 	}
 	
 	/**
-	 * Restores items from inventory string to specified player. Inventory string will be deleted.
+	 * Restores items from inventory stored in ArrayList
 	 * @param player player that will receive items
 	 */
 	public void restoreInventory(Player player)
@@ -584,7 +584,7 @@ public class JailPrisoner {
 			}
 			Jail.prisonerInventories.remove(player.getName());
 		}else{
-			Util.debug("Cant restore inventory of player!");
+			Util.debug("Cant find " + player.getName() + "'s inventory!");
 		}
 		InputOutput.UpdatePrisoner(this);
 	}
@@ -664,7 +664,6 @@ public class JailPrisoner {
 		
 		if (player == null)
 		{
-			
 			setOfflinePending(true);
 			setRemainingTime(0);
 			update();

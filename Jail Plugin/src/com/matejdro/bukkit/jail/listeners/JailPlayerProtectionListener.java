@@ -185,7 +185,7 @@ public class JailPlayerProtectionListener implements Listener {
 			}
 		 
 		 if(Jail.instance.handcuffed.contains(event.getPlayer().getName())){
-			event.getPlayer().teleport(event.getPlayer().getLocation());
+			event.setCancelled(true);
 			event.getPlayer().sendMessage(ChatColor.RED + "You are handcuffed and cant move!");
 		 }
 				

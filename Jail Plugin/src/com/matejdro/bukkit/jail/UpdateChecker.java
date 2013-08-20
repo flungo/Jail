@@ -40,7 +40,7 @@ public class UpdateChecker {
 			this.version = childeren.item(1).getTextContent().replaceAll("[a-zA-Z ]", "");
 			this.link = childeren.item(3).getTextContent();
 			
-			if(!plugin.getDescription().getVersion().equals(this.version)){
+			if(!plugin.getDescription().getVersion().startsWith(this.version.substring(0, 1)) && !plugin.getDescription().getVersion().endsWith(this.version.substring(this.version.length() - 1))){
 				return true;
 			}
 			
