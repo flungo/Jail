@@ -21,7 +21,7 @@ public static HashMap<String,CreationPlayer> players = new HashMap<String,Creati
 			player.getInventory().addItem(new ItemStack(Settings.getGlobalInt(Setting.SelectionTool),1));
 		
 		Util.Message(ChatColor.AQUA + "---------- Jail Cell Creation ----------", player);
-		Util.Message(ChatColor.GREEN + "First, you must select teleport point for the cell! Move to the teleport and then click anywhere with wooden sword, to set it", player);
+		Util.Message(ChatColor.GREEN + "First, you must select a teleport point for the cell! Move to the teleport point and then click anywhere with your wooden sword to set it", player);
 		Util.Message(ChatColor.AQUA + "----------------------------------------", player);
 		players.put(player.getName(), new CreationPlayer(name));
 	}
@@ -59,7 +59,7 @@ public static HashMap<String,CreationPlayer> players = new HashMap<String,Creati
 	private static void telepoint(Player player, Block block)
 	{
 		Util.Message(ChatColor.AQUA + "---------- Jail Cell Creation ----------", player);
-		Util.Message(ChatColor.GREEN + "Teleport point selected. Now select signs, associated with this cell. You may select multiple signs. After you are done with sign selection, right click on any non-sign block.", player);
+		Util.Message(ChatColor.GREEN + "Teleport point selected. Now select signs associated with this cell. You may select multiple signs. After you are done with the sign selection, right click on any non-sign block.", player);
 		Util.Message(ChatColor.AQUA + "----------------------------------------", player);
 		CreationPlayer cr = players.get(player.getName());
 		cr.cell.setTeleportLocation(player.getLocation());
@@ -78,7 +78,7 @@ public static HashMap<String,CreationPlayer> players = new HashMap<String,Creati
 		else
 		{
 			Util.Message(ChatColor.AQUA + "---------- Jail Cell Creation ----------", player);
-			Util.Message(ChatColor.GREEN + "Sign selection completed. Now select a double chest, associated with this cell. If there is no such chest, click on any non-chest block.", player);
+			Util.Message(ChatColor.GREEN + "Sign selection completed. Now select a double chest associated with this cell. If there is no such chest click on any non-chest block. (please note that having no chest may result in players items being lost)", player);
 			Util.Message(ChatColor.AQUA + "----------------------------------------", player);
 			cr.state++;
 		}
@@ -101,13 +101,13 @@ public static HashMap<String,CreationPlayer> players = new HashMap<String,Creati
 				cr.cell.setChest(block.getLocation());
 				cr.state ++;
 			}else{
-				Util.Message(ChatColor.RED + "Chest must be a double chest, no chest selected", player);
+				Util.Message(ChatColor.RED + "Chest must be a double chest, chest not selected", player);
 			}
 		}else{
 			cr.state++;
 		}
 		Util.Message(ChatColor.AQUA + "---------- Jail Cell Creation ----------", player);
-		Util.Message(ChatColor.GREEN + "Chest selected. Now type the name of the cell into chat. If you don't want to select cell name, just right click anywhere.", player);
+		Util.Message(ChatColor.GREEN + "Chest selected. Now type the name of the cell into chat. If you don't want to select a name for the cell just right click anywhere.", player);
 		Util.Message(ChatColor.AQUA + "----------------------------------------", player);
 	}
 	
@@ -115,7 +115,7 @@ public static HashMap<String,CreationPlayer> players = new HashMap<String,Creati
 	{
 		CreationPlayer cr = players.get(player.getName());
 		Util.Message(ChatColor.AQUA + "---------- Jail Cell Creation -----------", player);
-		Util.Message(ChatColor.GREEN + "Cell created. Now select teleport point of next cell. To stop creating, type /jailstop.", player);
+		Util.Message(ChatColor.GREEN + "Cell created. Now select the teleport point of the next cell. To stop creating cells, type /jailstop.", player);
 		Util.Message(ChatColor.AQUA + "-----------------------------------------", player);
 		finish(cr, player);
 	}
@@ -126,7 +126,7 @@ public static HashMap<String,CreationPlayer> players = new HashMap<String,Creati
 		
 		cr.cell.setName(name);
 		Util.Message(ChatColor.AQUA + "---------- Jail Cell Creation ----------", player);
-		Util.Message(ChatColor.GREEN + "Name set and cell created. Now select teleport point of next cell. To stop creating, type /jailstop.", player);
+		Util.Message(ChatColor.GREEN + "Name set and cell created. Now select the teleport point of the next cell. To stop creating cells, type /jailstop.", player);
 		Util.Message(ChatColor.AQUA + "----------------------------------------", player);
 
 		finish(cr, player);

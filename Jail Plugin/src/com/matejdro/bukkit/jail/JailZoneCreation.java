@@ -21,7 +21,7 @@ public static HashMap<String,CreationPlayer> players = new HashMap<String,Creati
 			player.getInventory().addItem(new ItemStack(Settings.getGlobalInt(Setting.SelectionTool),1));
 		
 		Util.Message(ChatColor.AQUA + "----------Jail Zone Creation----------", player);
-		Util.Message(ChatColor.GREEN + "First, you must select jail cuboid. Select first point of the cuboid by right clicking on the block with your wooden sword. DO NOT FORGET TO MARK FLOOR AND CEILING TOO!", player);
+		Util.Message(ChatColor.GREEN + "First, you must select jail cuboid. Select the first point of the cuboid by right clicking on the block with your wooden sword. DO NOT FORGET TO MARK THE FLOOR AND CEILING TOO!", player);
 		Util.Message(ChatColor.AQUA + "--------------------------------------", player);
 		players.put(player.getName(), new CreationPlayer());
 		players.get(player.getName()).name = name.toLowerCase();
@@ -64,7 +64,7 @@ public static HashMap<String,CreationPlayer> players = new HashMap<String,Creati
 	private static void secondpoint(Player player, Block block)
 	{
 		Util.Message(ChatColor.AQUA + "---------- Jail Zone Creation ----------", player);
-		Util.Message(ChatColor.GREEN + "Second point selected. Now go inside jail and right click anywhere to select your current position as teleport location.", player);
+		Util.Message(ChatColor.GREEN + "Second point selected. Now go inside the jail and right click anywhere to select your current position as the teleport location for the jail.", player);
 		Util.Message(ChatColor.AQUA + "----------------------------------------", player);
 		CreationPlayer cr = players.get(player.getName());
 		cr.X2 = block.getX();
@@ -78,7 +78,7 @@ public static HashMap<String,CreationPlayer> players = new HashMap<String,Creati
 	private static void telepoint(Player player)
 	{
 		Util.Message(ChatColor.AQUA + "---------- Jail Zone Creation ----------", player);
-		Util.Message(ChatColor.GREEN + "Teleport point selected. Now go outside of jail and right click anywhere to select your current position as location, where people will be teleported after they are released from this jail.", player);
+		Util.Message(ChatColor.GREEN + "Teleport point selected. Now go outside of the jail and right click anywhere to select your current position as the location where people will be teleported after they are released from this jail.", player);
 		Util.Message(ChatColor.AQUA + "----------------------------------------", player);
 		CreationPlayer cr = players.get(player.getName());
 		cr.teleX = player.getLocation().getX();

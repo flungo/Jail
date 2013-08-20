@@ -123,9 +123,9 @@ public class Jail extends JavaPlugin {
 		notificationsPlugin = (Notifications) getServer().getPluginManager().getPlugin("Notifications");
 		
 		if(notificationsPlugin == null){
-			getLogger().info("Notifications plugin not installed");
+			getLogger().info("Notifications plugin not installed, features disabled");
 		}else{
-			getLogger().info("Notifications plugin installed, features added!");
+			getLogger().info("Notifications plugin installed, features enabled!");
 		}
 		
 		getServer().getPluginManager().registerEvents(blockListener, this);
