@@ -422,10 +422,10 @@ public class JailStick {
             }
         }
         boolean hasClothing = false;
-		Color uniformColor = null;
-		if (requiredClothingDye > -1 && requiredClothingDye < DyeColor.values().length) {
-			uniformColor = DyeColor.values()[requiredClothingDye].getColor();
-		}
+        Color uniformColor = null;
+        if (requiredClothingDye > -1 && requiredClothingDye < DyeColor.values().length) {
+            uniformColor = DyeColor.values()[requiredClothingDye].getColor();
+        }
         // If a helmet is specified, check if they have the required helmet
         if (requiredHelmet > 0) {
             ItemStack helmet = victim.getInventory().getHelmet();
@@ -569,9 +569,9 @@ public class JailStick {
         int requiredExp = stick.getInt("required.exp", 0);
         int requiredMoney = stick.getInt("required.money", 0);
         int requiredHelmet = stick.getInt("required.clothing.helmet", 0);
-        int requiredChestplate = stick.getInt("required.clothing.helmet", 0);
-        int requiredLeggings = stick.getInt("required.clothing.helmet", 0);
-        int requiredBoots = stick.getInt("required.clothing.helmet", 0);
+        int requiredChestplate = stick.getInt("required.clothing.chestplate", 0);
+        int requiredLeggings = stick.getInt("required.clothing.leggings", 0);
+        int requiredBoots = stick.getInt("required.clothing.boots", 0);
         int requiredClothingDye = stick.getInt("required.clothing.dye", -1);
         boolean requireAllClothing = stick.getBoolean("required.clothing.requireAll", true);
         boolean requireAllRequirements = stick.getBoolean("required.requireAll", false);
@@ -601,14 +601,19 @@ public class JailStick {
         // Check the player has jailstick enabled, if they are holding a valid jailstick and that they have permission to use that jailstick.
         if (Jail.hasJailStickEnabled(p) && Jail.containsJailStick(p.getItemInHand().getTypeId()) && Util.permission(p, "jail.usejailstick." + p.getItemInHand().getTypeId(), PermissionDefault.OP)) {
             JailStick stick = Jail.getJailStick(p.getItemInHand().getTypeId());
+            int dyeID = stick.getUniformDye();
+            Color uniformColor = null;
+            if (dyeID > -1 && dyeID < DyeColor.values().length) {
+                uniformColor = DyeColor.values()[dyeID].getColor();
+            }
             // Checks if he player must have a helmet to jail with this stick
             if (stick.getUniformHelmet() > 0) {
                 ItemStack helmet = p.getInventory().getHelmet();
                 // If a helmet is required, fail if they are not wearing them
                 if (helmet == null || stick.getUniformHelmet() != helmet.getTypeId()
                         // or if the helmet is leather and not of the correct dye color (if required)
-                        || (helmet.getType() == Material.LEATHER_HELMET && stick.getUniformDye() >= 0
-                        && !((LeatherArmorMeta) helmet.getItemMeta()).getColor().equals(new Wool(stick.getUniformDye()).getColor()))) {
+                        || (helmet.getType() == Material.LEATHER_HELMET && uniformColor != null
+                        && !((LeatherArmorMeta) helmet.getItemMeta()).getColor().equals(uniformColor))) {
                     p.sendMessage(ChatColor.RED + "You are not wearing the correct helmet to use your current item as a jailstick.");
                     return null;
                 }
@@ -619,8 +624,8 @@ public class JailStick {
                 // If a chestplate is required, fail if they are not wearing them
                 if (chestplate == null || stick.getUniformChestplate() != chestplate.getTypeId()
                         // or if the chestpkate is leather and not of the correct dye color (if required)
-                        || (chestplate.getType() == Material.LEATHER_CHESTPLATE && stick.getUniformDye() >= 0
-                        && ((LeatherArmorMeta) chestplate.getItemMeta()).getColor().equals(new Wool(stick.getUniformDye()).getColor()))) {
+                        || !(chestplate.getType() == Material.LEATHER_CHESTPLATE && uniformColor != null
+                        && ((LeatherArmorMeta) chestplate.getItemMeta()).getColor().equals(uniformColor))) {
                     p.sendMessage(ChatColor.RED + "You are not wearing the correct chestplate to use your current item as a jailstick.");
                     return null;
                 }
@@ -631,20 +636,20 @@ public class JailStick {
                 // If leggings are required, fail if they are not wearing them
                 if (leggings == null || stick.getUniformLeggings() != leggings.getTypeId()
                         // or if the leggings are leather and not of the correct dye color (if required)
-                        || (leggings.getType() == Material.LEATHER_LEGGINGS && stick.getUniformDye() >= 0
-                        && ((LeatherArmorMeta) leggings.getItemMeta()).getColor().equals(new Wool(stick.getUniformDye()).getColor()))) {
+                        || !(leggings.getType() == Material.LEATHER_LEGGINGS && uniformColor != null
+                        && ((LeatherArmorMeta) leggings.getItemMeta()).getColor().equals(uniformColor))) {
                     p.sendMessage(ChatColor.RED + "You are not wearing the correct leggings to use your current item as a jailstick.");
                     return null;
                 }
             }
             // Checks if he player must have boots to jail with this stick
             if (stick.getUniformBoots() > 0) {
-                ItemStack boots = p.getInventory().getLeggings();
+                ItemStack boots = p.getInventory().getBoots();
                 // If boots are required, fail if they are not wearing them
                 if (boots == null || stick.getUniformBoots() != boots.getTypeId()
                         // or if the boots are leather and not of the correct dye color (if required)
-                        || (boots.getType() == Material.LEATHER_BOOTS && stick.getUniformDye() >= 0
-                        && ((LeatherArmorMeta) boots.getItemMeta()).getColor().equals(new Wool(stick.getUniformDye()).getColor()))) {
+                        || !(boots.getType() == Material.LEATHER_BOOTS && uniformColor != null
+                        && ((LeatherArmorMeta) boots.getItemMeta()).getColor().equals(uniformColor))) {
                     p.sendMessage(ChatColor.RED + "You are not wearing the correct boots to use your current item as a jailstick.");
                     return null;
                 }
