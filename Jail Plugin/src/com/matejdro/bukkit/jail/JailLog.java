@@ -8,6 +8,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 /**
@@ -44,9 +45,9 @@ public class JailLog {
             Date date = new Date();
             
             if(player != null){
-            	pw.println("[" + dateFormat.format(date) + "] " + player.getName() + " jailed by " + sender + ". Reason: " + reason);
+            	pw.println("[" + dateFormat.format(date) + "] " + ChatColor.BLUE + player.getName() + ChatColor.WHITE + " jailed by " + ChatColor.BLUE + sender + ChatColor.WHITE + ". Reason: " + ChatColor.BLUE + reason);
             }else{
-            	pw.println("[" + dateFormat.format(date) + "] " + name + " was jailed for " + time + " minutes by " + sender +". Reason: " + reason);
+            	pw.println("[" + dateFormat.format(date) + "] " + ChatColor.BLUE + name + ChatColor.WHITE + " jailed by " + ChatColor.BLUE + sender + ChatColor.WHITE + ". Reason: " + ChatColor.BLUE + reason);
             }
             pw.flush();
             pw.close();

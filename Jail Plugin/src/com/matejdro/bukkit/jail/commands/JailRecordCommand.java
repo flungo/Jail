@@ -41,20 +41,28 @@ public class JailRecordCommand extends BaseCommand{
 	            Scanner scanner = new Scanner(jailLogFile);
 	            
 	            int lineNum = 0;
+	            int timesJailed = 0;
 	            
 	            while(scanner.hasNextLine()){
 	            	String line = scanner.nextLine();
 	            	lineNum++;
 	            	if(line.contains(args[0] + " ")){
+	            		timesJailed ++;
 	            		sender.sendMessage(line);
 	            		messageNumber ++;
 	            	}
 	            }
 	            
+	            sender.sendMessage(ChatColor.RED + "This player has been jailed " + ChatColor.GREEN + timesJailed + ChatColor.RED + " times");
+	            
 	            if(messageNumber == 0){
 	            	sender.sendMessage(ChatColor.RED + "This player has not been jailed!");
 	            }else{
 	            	messageNumber = 0;
+	            }
+	            
+	            if(timesJailed !=  0){
+	            	timesJailed = 0;
 	            }
 	            
 			}catch(IOException e){
