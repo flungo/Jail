@@ -20,7 +20,7 @@ public class JailListCommand extends BaseCommand {
 		String message = "Jail list: ";
 		if (Jail.zones.size() == 0)
 		{
-			message+= "You have no jails!";
+			message+= "You have no jails! Why not set some up?";
 		}
 		else
 		{
