@@ -87,13 +87,6 @@ public class Jail extends JavaPlugin {
 	public ArrayList<Material> leggings = new ArrayList<Material>();
 	public ArrayList<Material> boots = new ArrayList<Material>();
 
-	//Test
-	//public Jail(PluginLoader pluginLoader, Server instance, PluginDescriptionFile desc, File folder, File plugin, ClassLoader cLoader) {
-	//super(pluginLoader, instance, desc, folder, plugin, cLoader);
-
-
-	// }
-
 	@Override
 	public void onDisable() {
 		if (timer != null)
