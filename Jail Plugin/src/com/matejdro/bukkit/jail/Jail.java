@@ -53,7 +53,7 @@ import com.matejdro.bukkit.jail.listeners.JailPlayerListener;
 import com.matejdro.bukkit.jail.listeners.JailPlayerProtectionListener;
 
 
-// Test
+// Test test test....
 
 public class Jail extends JavaPlugin {
 	public static Logger log = Logger.getLogger("Minecraft");
