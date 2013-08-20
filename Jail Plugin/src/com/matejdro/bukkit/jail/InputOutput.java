@@ -519,6 +519,9 @@ public class InputOutput {
     
     public static void UpdatePrisoner(JailPrisoner p)
     {
+    	
+    	JailScoreboardManager scoreboard = new JailScoreboardManager();
+    	scoreboard.displayJailTime();
     	try {
 			Connection conn = InputOutput.getConnection();
 			if (conn == null || conn.isClosed()) return;

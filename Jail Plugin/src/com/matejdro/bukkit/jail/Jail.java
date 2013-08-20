@@ -10,6 +10,7 @@ import javax.swing.Timer;
 
 import me.muizers.Notifications.Notifications;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -183,6 +184,14 @@ public class Jail extends JavaPlugin {
 		commands.put("handcuff", new JailHandcuffCommand());
 
 		IO.initMetrics();
+		
+		final JailScoreboardManager manager = new JailScoreboardManager();
+		
+		Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
+			public void run(){
+				manager.displayJailTime();
+			}
+		}, 10, 50);
 
 		log.info("[Jail] " + getDescription().getFullName() + " loaded!");
 	}
