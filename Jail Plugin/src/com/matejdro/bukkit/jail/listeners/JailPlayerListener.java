@@ -80,7 +80,7 @@ public class JailPlayerListener implements Listener {
 
         for(Object o : Settings.getGlobalList(Setting.BannedWords)){
         	String word = (String) o;
-            if(event.getMessage().toLowerCase().contains(" " + word + " ") && Settings.getGlobalBoolean(Setting.EnableJailSwear)){
+            if(event.getMessage().toLowerCase().contains(word + " ") && Settings.getGlobalBoolean(Setting.EnableJailSwear)){
                 event.setCancelled(true);
                 JailPrisoner prisoner = new JailPrisoner(event.getPlayer().getName(), Settings.getGlobalInt(Setting.JailSwearTime) * 6, "", "", false, "", "Swearing", true, "", "", "", event.getPlayer().getGameMode());
                 PrisonerManager.PrepareJail(prisoner, event.getPlayer());
