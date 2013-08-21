@@ -65,18 +65,18 @@ public class JailPlayerProtectionListener implements Listener {
 		{			
 			boolean whitelisted = false;
 			
-			if (jail.getSettings().getList(Setting.WhitelistedCommands).size() > 0 )
-			{
-				for (Object o : jail.getSettings().getList(Setting.WhitelistedCommands))
-				{
-					String i = (String) o;
-					if (event.getMessage().toLowerCase().contains(i.toLowerCase()))
-					{
+			if(jail.getSettings().getList(Setting.WhitelistedCommands).size() > 0){
+				for(Object o : jail.getSettings().getList(Setting.WhitelistedCommands)){
+					String i = null;
+					if(o instanceof String){
+						i = (String) o;
+					}
+					
+					if(i != null && event.getMessage().toLowerCase().contains(i.toLowerCase())){
 						whitelisted = true;
 						break;
 					}
 				}
-				
 			}
 			else
 			{
