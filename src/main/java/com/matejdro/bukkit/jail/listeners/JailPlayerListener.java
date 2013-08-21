@@ -46,7 +46,7 @@ public class JailPlayerListener implements Listener {
 
         if (stick != null && stick.checkRequirements(damager, player)) {
             stick.invokeActions(damager, player);
-            JailPrisoner prisoner = new JailPrisoner(player.getName(), stick.getTime(), stick.getJail().getName(), "", false, "", stick.getReason(), false, "", "", "", player.getGameMode());
+            JailPrisoner prisoner = new JailPrisoner(player.getName(), stick.getTime(), stick.getJail(), "", false, "", stick.getReason(), false, "", "", "", player.getGameMode());
             PrisonerManager.PrepareJail(prisoner, player);
             JailLog logger = new JailLog();
             damager.sendMessage(ChatColor.RED + "You jailed " + ChatColor.GREEN + player.getName() + ChatColor.RED + " for " + ChatColor.GREEN + stick.getTime() + ChatColor.RED + " minutes");

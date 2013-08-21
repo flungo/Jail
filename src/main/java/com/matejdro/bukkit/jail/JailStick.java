@@ -21,7 +21,7 @@ public class JailStick {
     private final int id;
     private int range;
     private int time;
-    private JailZone jail;
+    private String jail;
     private String reason;
     private List<Integer> requiredItems;
     private boolean requireAllItems;
@@ -46,7 +46,7 @@ public class JailStick {
     private int uniformBoots;
     private int uniformDye;
 
-    public JailStick(int id, int range, int time, JailZone jail, String reason, List<Integer> requiredItems, boolean requireAllItems, int requiredHealth, int requiredExp, int requiredMoney, int requiredHelmet, int requiredChestplate, int requiredLeggings, int requiredBoots, int requiredClothingDye, boolean requireAllClothing, boolean requireAllRequirements, int penaltyHealth, int penaltyExp, int penaltyMoney, List<Integer> takeItems, List<Integer> friskItems, int uniformHelmet, int uniformChestplate, int uniformLeggings, int uniformBoots, int uniformDye) {
+    public JailStick(int id, int range, int time, String jail, String reason, List<Integer> requiredItems, boolean requireAllItems, int requiredHealth, int requiredExp, int requiredMoney, int requiredHelmet, int requiredChestplate, int requiredLeggings, int requiredBoots, int requiredClothingDye, boolean requireAllClothing, boolean requireAllRequirements, int penaltyHealth, int penaltyExp, int penaltyMoney, List<Integer> takeItems, List<Integer> friskItems, int uniformHelmet, int uniformChestplate, int uniformLeggings, int uniformBoots, int uniformDye) {
         this.id = id;
         this.range = range;
         this.time = time;
@@ -100,12 +100,18 @@ public class JailStick {
         this.time = time;
     }
 
-    public JailZone getJail() {
+    public String getJail() {
         return jail;
     }
 
     public void setJail(JailZone jail) {
         InputOutput.getGlobalConfig().set("JailSticks." + getId() + ".jail", jail.getName());
+        InputOutput.saveGlobalConfig();
+        this.jail = jail.getName();
+    }
+
+    public void setJail(String jail) {
+        InputOutput.getGlobalConfig().set("JailSticks." + getId() + ".jail", jail);
         InputOutput.saveGlobalConfig();
         this.jail = jail;
     }
@@ -561,7 +567,7 @@ public class JailStick {
         ConfigurationSection stick = InputOutput.getGlobalConfig().getConfigurationSection("JailSticks." + itemId);
         int range = stick.getInt("range", 5);
         int time = stick.getInt("time", 10);
-        JailZone jail = Jail.zones.get(stick.getString("jail", null)); // Does this return null when jail is undefined or defined blank?
+        String jail = stick.getString("jail", null); // Does this return null when jail is undefined or defined blank?
         String reason = stick.getString("reason", "");
         List<Integer> requiredItems = stick.getIntegerList("requirements.items");
         boolean requireAllItems = stick.getBoolean("requirements.requireAllItems", false);
