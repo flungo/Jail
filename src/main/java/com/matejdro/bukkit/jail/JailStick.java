@@ -7,6 +7,7 @@ import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.material.Wool;
@@ -23,7 +24,7 @@ public class JailStick {
 	private int time;
 	private String jail;
 	private String reason;
-	private List<Integer> requiredItems;
+	private List<ItemSpecification> requiredItems;
 	private boolean requireAllItems;
 	private int requiredHealth;
 	private int requiredExp;
@@ -38,15 +39,15 @@ public class JailStick {
 	private int penaltyHealth;
 	private int penaltyExp;
 	private int penaltyMoney;
-	private List<Integer> takeItems;
-	private List<Integer> friskItems;
+	private List<ItemSpecification> takeItems;
+	private List<ItemSpecification> friskItems;
 	private int uniformHelmet;
 	private int uniformChestplate;
 	private int uniformLeggings;
 	private int uniformBoots;
 	private int uniformDye;
 
-	public JailStick(int id, int range, int time, String jail, String reason, List<Integer> requiredItems, boolean requireAllItems, int requiredHealth, int requiredExp, int requiredMoney, int requiredHelmet, int requiredChestplate, int requiredLeggings, int requiredBoots, int requiredClothingDye, boolean requireAllClothing, boolean requireAllRequirements, int penaltyHealth, int penaltyExp, int penaltyMoney, List<Integer> takeItems, List<Integer> friskItems, int uniformHelmet, int uniformChestplate, int uniformLeggings, int uniformBoots, int uniformDye) {
+	public JailStick(int id, int range, int time, String jail, String reason, List<ItemSpecification> requiredItems, boolean requireAllItems, int requiredHealth, int requiredExp, int requiredMoney, int requiredHelmet, int requiredChestplate, int requiredLeggings, int requiredBoots, int requiredClothingDye, boolean requireAllClothing, boolean requireAllRequirements, int penaltyHealth, int penaltyExp, int penaltyMoney, List<ItemSpecification> takeItems, List<ItemSpecification> friskItems, int uniformHelmet, int uniformChestplate, int uniformLeggings, int uniformBoots, int uniformDye) {
 		this.id = id;
 		this.range = range;
 		this.time = time;
@@ -126,11 +127,11 @@ public class JailStick {
 		this.reason = reason;
 	}
 
-	public List<Integer> getRequiredItems() {
+	public List<ItemSpecification> getRequiredItems() {
 		return requiredItems;
 	}
 
-	public void setRequiredItems(List<Integer> requiredItems) {
+	public void setRequiredItems(List<ItemSpecification> requiredItems) {
 		InputOutput.getGlobalConfig().set("JailSticks." + getId() + ".required.items", requiredItems);
 		InputOutput.saveGlobalConfig();
 		this.requiredItems = requiredItems;
@@ -276,21 +277,21 @@ public class JailStick {
 		this.penaltyMoney = penaltyMoney;
 	}
 
-	public List<Integer> getTakeItems() {
+	public List<ItemSpecification> getTakeItems() {
 		return takeItems;
 	}
 
-	public void setTakeItems(List<Integer> takeItems) {
+	public void setTakeItems(List<ItemSpecification> takeItems) {
 		InputOutput.getGlobalConfig().set("JailSticks." + getId() + ".take", takeItems);
 		InputOutput.saveGlobalConfig();
 		this.takeItems = takeItems;
 	}
 
-	public List<Integer> getFriskItems() {
+	public List<ItemSpecification> getFriskItems() {
 		return friskItems;
 	}
 
-	public void setFriskItems(List<Integer> friskItems) {
+	public void setFriskItems(List<ItemSpecification> friskItems) {
 		InputOutput.getGlobalConfig().set("JailSticks." + getId() + ".frisk", friskItems);
 		InputOutput.saveGlobalConfig();
 		this.friskItems = friskItems;
@@ -360,8 +361,8 @@ public class JailStick {
 			checkedRequirements = true;
 			boolean hasItem = false;
 			items:
-			for (Integer itemId : requiredItems) {
-				if (victim.getInventory().contains(itemId)) {
+			for (ItemStack item : victim.getInventory()) {
+				if (requiredItems.contains(item)) {
 					hasItem = true;
 					// If the victim has the item and they don't need all items they we know they passed the items test and can break from this loop.
 					if (!requireAllItems) {
@@ -596,14 +597,15 @@ public class JailStick {
 	}
 
 	public void invokeActions(Player holder, Player victim) {
-		for (int itemId : takeItems) {
-			victim.getInventory().remove(itemId);
-		}
-		for (int itemId : friskItems) {
-			for (ItemStack stack : victim.getInventory().all(itemId).values()) {
-				holder.getInventory().addItem(stack);
+		Inventory inv = victim.getInventory();
+		for (ItemStack item : inv) {
+			if (takeItems.contains(item)) {
+				inv.remove(item);
 			}
-			victim.getInventory().remove(itemId);
+			if (friskItems.contains(item)) {
+				holder.getInventory().addItem(item);
+				inv.remove(item);
+			}
 		}
 	}
 
@@ -613,7 +615,7 @@ public class JailStick {
 		int time = stick.getInt("time", 10);
 		String jail = stick.getString("jail", null); // Does this return null when jail is undefined or defined blank?
 		String reason = stick.getString("reason", "");
-		List<Integer> requiredItems = stick.getIntegerList("requirements.items");
+		List<ItemSpecification> requiredItems = ItemSpecification.convertStringList(stick.getStringList("requirements.items"));
 		boolean requireAllItems = stick.getBoolean("requirements.requireAllItems", false);
 		int requiredHealth = stick.getInt("requirements.health", 0);
 		int requiredExp = stick.getInt("requirements.exp", 0);
@@ -628,8 +630,8 @@ public class JailStick {
 		int penaltyHealth = stick.getInt("penalties.health", 0);
 		int penaltyExp = stick.getInt("penalties.exp", 0);
 		int penaltyMoney = stick.getInt("penalties.money", 0);
-		List<Integer> takeItems = stick.getIntegerList("take.items");
-		List<Integer> friskItems = stick.getIntegerList("frisk.items");
+		List<ItemSpecification> takeItems = ItemSpecification.convertStringList(stick.getStringList("take.items"));
+		List<ItemSpecification> friskItems = ItemSpecification.convertStringList(stick.getStringList("frisk.items"));
 		int uniformHelmet = stick.getInt("uniform.helmet", 0);
 		int uniformChestplate = stick.getInt("uniform.chestplate", 0);
 		int uniformLeggings = stick.getInt("uniform.leggings", 0);
