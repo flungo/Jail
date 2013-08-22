@@ -769,6 +769,10 @@ public class InputOutput {
         return getConfigAccessor("global.yml").getConfig();
     }
 
+    public static void reloadGlobalConfig() {
+        getConfigAccessor("global.yml").reloadConfig();
+    }
+
     public static void saveGlobalConfig() {
         getConfigAccessor("golbal.yml").saveConfig();
     }

@@ -1,5 +1,6 @@
 package com.matejdro.bukkit.jail.commands;
 
+import com.matejdro.bukkit.jail.InputOutput;
 import org.bukkit.command.CommandSender;
 
 import com.matejdro.bukkit.jail.Jail;
@@ -14,6 +15,7 @@ public class JailReloadCommand extends BaseCommand {
     }
 
     public Boolean run(CommandSender sender, String[] args) {
+		InputOutput.reloadGlobalConfig();
         Jail.instance.IO.LoadSettings();
         Jail.instance.IO.LoadJails();
         Jail.instance.IO.LoadPrisoners();
