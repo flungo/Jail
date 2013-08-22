@@ -354,7 +354,7 @@ public class JailStick {
 		}
 		// Flag if any requirements were checked
 		boolean checkedRequirements = false;
-		
+
 		// If required items list is not empty check they meet the specified criteria
 		if (!requiredItems.isEmpty()) {
 			checkedRequirements = true;
@@ -371,7 +371,7 @@ public class JailStick {
 					// If the victim requires all items but don't have one then they have failed the requirements.
 					holder.sendMessage(ChatColor.RED + "Could not jail " + victim.getName() + ": player did not have all the required items.");
 					imposePenalty(holder);
-					return false;	
+					return false;
 				}
 			}
 
@@ -410,10 +410,12 @@ public class JailStick {
 		if (requiredExp > 0) {
 			checkedRequirements = true;
 			if (victim.getExp() < requiredExp) {
-				// If the victim is too wounded they have failed the requirements
-				holder.sendMessage(ChatColor.RED + "Could not jail " + victim.getName() + ": player did not have enough exp.");
-				imposePenalty(holder);
-				return false;
+				if (requireAllRequirements) {
+					// If the victim is too wounded they have failed the requirements
+					holder.sendMessage(ChatColor.RED + "Could not jail " + victim.getName() + ": player did not have enough exp.");
+					imposePenalty(holder);
+					return false;
+				}
 			} else {
 				// If the player needs to only meet one requirement and they have done so return true
 				if (!requireAllRequirements) {
@@ -425,10 +427,12 @@ public class JailStick {
 		if (Util.economy != null && requiredMoney > 0) {
 			checkedRequirements = true;
 			if (!Util.economy.has(victim.getName(), requiredMoney)) {
-				// If the victim is too wounded they have failed the requirements
-				holder.sendMessage(ChatColor.RED + "Could not jail " + victim.getName() + ": player did not have enough exp.");
-				imposePenalty(holder);
-				return false;
+				if (requireAllRequirements) {
+					// If the victim is too wounded they have failed the requirements
+					holder.sendMessage(ChatColor.RED + "Could not jail " + victim.getName() + ": player did not have enough exp.");
+					imposePenalty(holder);
+					return false;
+				}
 			} else {
 				// If the player needs to only meet one requirement and they have done so return true
 				if (!requireAllRequirements) {
@@ -437,6 +441,7 @@ public class JailStick {
 			}
 		}
 		boolean hasClothing = false;
+		boolean hasAllClothing = true;
 		Color uniformColor = null;
 		if (requiredClothingDye > -1 && requiredClothingDye < DyeColor.values().length) {
 			uniformColor = DyeColor.values()[requiredClothingDye].getColor();
@@ -450,16 +455,17 @@ public class JailStick {
 					// or if the helmet is leather and not of the correct dye color (if required)
 					|| (helmet.getType() == Material.LEATHER_HELMET && uniformColor != null
 					&& !((LeatherArmorMeta) helmet.getItemMeta()).getColor().equals(uniformColor))) {
-				if (requireAllClothing) {
+				hasAllClothing = false;
+				if (requireAllClothing && requireAllRequirements) {
 					// If the victim is not wearing the required helmet and they require all clothing they have failed the requirements
 					holder.sendMessage(ChatColor.RED + "Could not jail " + victim.getName() + ": player was not wearing the correct helmet");
 					imposePenalty(holder);
 					return false;
 				}
 			} else {
+				hasClothing = true;
 				if (!requireAllClothing) {
 					// Set had clothing so further clothing items aren't checked
-					hasClothing = true;
 					if (!requireAllRequirements) {
 						// If the player needs to only meet one requirement and have 1 peice of clothing and they have done so return true
 						return true;
@@ -468,24 +474,25 @@ public class JailStick {
 			}
 		}
 		// If a chestplate is specified, check if they have the required chestplate
-		if (!hasClothing && requiredChestplate > 0) {
+		if (requireAllClothing ? hasAllClothing : !hasClothing && requiredChestplate > 0) {
 			checkedRequirements = true;
-			ItemStack chestplate = victim.getInventory().getHelmet();
+			ItemStack chestplate = victim.getInventory().getChestplate();
 			// If a chestplate is required, fail if they are not wearing them
 			if (chestplate == null || requiredChestplate != chestplate.getTypeId()
 					// or if the chestplate is leather and not of the correct dye color (if required)
 					|| (chestplate.getType() == Material.LEATHER_HELMET && uniformColor != null
 					&& !((LeatherArmorMeta) chestplate.getItemMeta()).getColor().equals(uniformColor))) {
-				if (requireAllClothing) {
+				hasAllClothing = false;
+				if (requireAllClothing && requireAllRequirements) {
 					// If the victim is not wearing the required chestplate and they require all clothing they have failed the requirements
 					holder.sendMessage(ChatColor.RED + "Could not jail " + victim.getName() + ": player was not wearing the correct chestplate");
 					imposePenalty(holder);
 					return false;
 				}
 			} else {
+				hasClothing = true;
 				if (!requireAllClothing) {
 					// Set had clothing so further clothing items aren't checked
-					hasClothing = true;
 					if (!requireAllRequirements) {
 						// If the player needs to only meet one requirement and have 1 peice of clothing and they have done so return true
 						return true;
@@ -494,23 +501,25 @@ public class JailStick {
 			}
 		}
 		// If leggings are specified, check if they have the required leggings
-		if (!hasClothing && requiredLeggings > 0) {
+		if (requireAllClothing ? hasAllClothing : !hasClothing && requiredLeggings > 0) {
+			checkedRequirements = true;
 			ItemStack leggings = victim.getInventory().getLeggings();
 			// If leggings are required, fail if they are not wearing them
 			if (leggings == null || requiredLeggings != leggings.getTypeId()
 					// or if the leggings are leather and not of the correct dye color (if required)
 					|| (leggings.getType() == Material.LEATHER_HELMET && uniformColor != null
 					&& !((LeatherArmorMeta) leggings.getItemMeta()).getColor().equals(uniformColor))) {
-				if (requireAllClothing) {
+				hasAllClothing = false;
+				if (requireAllClothing && requireAllRequirements) {
 					// If the victim is not wearing the required leggings and they require all clothing they have failed the requirements
 					holder.sendMessage(ChatColor.RED + "Could not jail " + victim.getName() + ": player was not wearing the correct leggings");
 					imposePenalty(holder);
 					return false;
 				}
 			} else {
+				hasClothing = true;
 				if (!requireAllClothing) {
 					// Set had clothing so further clothing items aren't checked
-					hasClothing = true;
 					if (!requireAllRequirements) {
 						// If the player needs to only meet one requirement and have 1 peice of clothing and they have done so return true
 						return true;
@@ -519,23 +528,25 @@ public class JailStick {
 			}
 		}
 		// If boots are specified, check if they have the required boots
-		if (!hasClothing && requiredBoots > 0) {
+		if (requireAllClothing ? hasAllClothing : !hasClothing && requiredBoots > 0) {
+			checkedRequirements = true;
 			ItemStack boots = victim.getInventory().getBoots();
 			// If boots are required, fail if they are not wearing them
 			if (boots == null || requiredBoots != boots.getTypeId()
 					// or if the boots are leather and not of the correct dye color (if required)
 					|| (boots.getType() == Material.LEATHER_HELMET && uniformColor != null
 					&& !((LeatherArmorMeta) boots.getItemMeta()).getColor().equals(uniformColor))) {
-				if (requireAllClothing) {
+				hasAllClothing = false;
+				if (requireAllClothing && requireAllRequirements) {
 					// If the victim is not wearing the required boots and they require all clothing they have failed the requirements
 					holder.sendMessage(ChatColor.RED + "Could not jail " + victim.getName() + ": player was not wearing the correct boots");
 					imposePenalty(holder);
 					return false;
 				}
 			} else {
+				hasClothing = true;
 				if (!requireAllClothing) {
 					// Set had clothing so further clothing items aren't checked
-					hasClothing = true;
 					if (!requireAllRequirements) {
 						// If the player needs to only meet one requirement and have 1 peice of clothing and they have done so return true
 						return true;
@@ -543,8 +554,12 @@ public class JailStick {
 				}
 			}
 		}
+		if (!requireAllRequirements && requireAllClothing && hasAllClothing) {
+			// Player has all the clothing and we don't need all requirements so return true (a requirement has been met)
+			return true;
+		}
 		// If they dont have any clothing and some was needed then the victim does not meet the requirements
-		if (!hasClothing && (requiredHelmet > 0 || requiredChestplate > 0 || requiredLeggings > 0 || requiredBoots > 0)) {
+		if (requireAllRequirements && !hasClothing && (requiredHelmet > 0 || requiredChestplate > 0 || requiredLeggings > 0 || requiredBoots > 0)) {
 			holder.sendMessage(ChatColor.RED + "Could not jail " + victim.getName() + ": player was not wearing the correct clothing");
 			imposePenalty(holder);
 			return false;
@@ -564,6 +579,8 @@ public class JailStick {
 				// If we didn't require all requirements and a requirement had
 				// matched then we would have already returned true, so we must
 				// not have matched any requirements.
+				holder.sendMessage(ChatColor.RED + "Could not jail " + victim.getName() + ": player did not meet any requirements");
+				imposePenalty(holder);
 				return false;
 			}
 		}
