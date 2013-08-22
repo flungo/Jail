@@ -625,9 +625,9 @@ public class JailStick {
 		int requiredClothingDye = stick.getInt("requirements.clothing.dye", -1);
 		boolean requireAllClothing = stick.getBoolean("requirements.clothing.requireAll", true);
 		boolean requireAllRequirements = stick.getBoolean("requirements.requireAll", false);
-		int penaltyHealth = stick.getInt("penalty.health", 0);
-		int penaltyExp = stick.getInt("penalty.exp", 0);
-		int penaltyMoney = stick.getInt("penalty.money", 0);
+		int penaltyHealth = stick.getInt("penalties.health", 0);
+		int penaltyExp = stick.getInt("penalties.exp", 0);
+		int penaltyMoney = stick.getInt("penalties.money", 0);
 		List<Integer> takeItems = stick.getIntegerList("take.items");
 		List<Integer> friskItems = stick.getIntegerList("frisk.items");
 		int uniformHelmet = stick.getInt("uniform.helmet", 0);
