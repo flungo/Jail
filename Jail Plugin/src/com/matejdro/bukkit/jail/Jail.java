@@ -46,6 +46,7 @@ import com.matejdro.bukkit.jail.commands.JailTeleInCommand;
 import com.matejdro.bukkit.jail.commands.JailTeleOutCommand;
 import com.matejdro.bukkit.jail.commands.JailTransferAllCommand;
 import com.matejdro.bukkit.jail.commands.JailTransferCommand;
+import com.matejdro.bukkit.jail.commands.JailVersionCommand;
 import com.matejdro.bukkit.jail.commands.JailVoteCommand;
 import com.matejdro.bukkit.jail.commands.UnJailCommand;
 import com.matejdro.bukkit.jail.commands.UnJailForceCommand;
@@ -180,6 +181,7 @@ public class Jail extends JavaPlugin {
 		commands.put("jaildeletecell", new JailDeleteCellCommand());
 		commands.put("jailreload", new JailReloadCommand());
 		commands.put("jailrecord", new JailRecordCommand());
+		commands.put("jailversion", new JailVersionCommand());
 		commands.put("votejail", new JailVoteCommand());
 		commands.put("handcuff", new JailHandcuffCommand());
 

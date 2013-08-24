@@ -61,6 +61,8 @@ commands:
         description: Reload jail data
     jailrecord:
         description: Shows a players record
+    jailversion:
+        description: Shows the plugin version
     votejail:
         description: Allows players to vote to jail a player
     handcuff:
