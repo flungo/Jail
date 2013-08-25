@@ -112,6 +112,7 @@ permissions:
             jail.usercmd.jailstick: true
             jail.usercmd.votejail: true
             jail.usercmd.votejail.player: true
+            jail.usercmd.jailversion: true
     jail.command.jail:
         default: op
     jail.command.jailcreate:
@@ -158,6 +159,8 @@ permissions:
         default: op
     jail.command.jailrecord:
         default: op
+    jail.usercmd.jailversion:
+        default: true
     jail.command.handcuff:
         default: op
     jail.usercmd.jailvote:
