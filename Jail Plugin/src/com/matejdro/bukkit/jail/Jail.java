@@ -11,6 +11,7 @@ import javax.swing.Timer;
 import me.muizers.Notifications.Notifications;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -203,6 +204,24 @@ public class Jail extends JavaPlugin {
 		BaseCommand cmd = commands.get(command.getName().toLowerCase());
 		if (cmd != null) return cmd.execute(sender, args);
 		return false;
+	}
+	
+	public ChatColor getChatColor(String color){
+		if(color.equalsIgnoreCase("red")){
+			return ChatColor.RED;
+		}else if(color.equalsIgnoreCase("blue")){
+			return ChatColor.BLUE;
+		}else if(color.equalsIgnoreCase("green")){
+			return ChatColor.GREEN;
+		}else if(color.equalsIgnoreCase("aqua")){
+			return ChatColor.AQUA;
+		}else if(color.equalsIgnoreCase("gold")){
+			return ChatColor.GOLD;
+		}else if(color.equalsIgnoreCase("black")){
+			return ChatColor.BLACK;
+		}else{
+			return ChatColor.WHITE;
+		}
 	}
 
 	class TimeEvent implements Runnable
