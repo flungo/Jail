@@ -1,5 +1,6 @@
 package com.matejdro.bukkit.jail.commands;
 
+import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
 import com.matejdro.bukkit.jail.Jail;
@@ -21,7 +22,7 @@ public class JailReloadCommand extends BaseCommand {
 		Jail.instance.IO.LoadPrisoners();
 		Jail.instance.IO.LoadCells();
 		
-		Util.Message("&6Jail data reloaded.", sender);
+		Util.Message(ChatColor.GOLD + "Jail data reloaded.", sender);
 		return true;
 	}
 
