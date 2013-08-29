@@ -22,7 +22,7 @@ public class JailReloadCommand extends BaseCommand {
 		Jail.instance.IO.LoadPrisoners();
 		Jail.instance.IO.LoadCells();
 		
-		Util.Message(ChatColor.GOLD + "Jail data reloaded.", sender);
+		Util.Message(ChatColor.GOLD + "Jail config reloaded.", sender);
 		return true;
 	}
 
