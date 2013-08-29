@@ -219,7 +219,14 @@ public class Jail extends JavaPlugin {
 			return ChatColor.GOLD;
 		}else if(color.equalsIgnoreCase("black")){
 			return ChatColor.BLACK;
-		}else{
+		}else if(color.equalsIgnoreCase("darkred'")){
+			return ChatColor.DARK_RED;
+		}else if(color.equalsIgnoreCase("bold")){
+			return ChatColor.BOLD;
+		}else if(color.equalsIgnoreCase("darkblue")){
+			return ChatColor.DARK_BLUE;
+		}
+		else{
 			return ChatColor.WHITE;
 		}
 	}
