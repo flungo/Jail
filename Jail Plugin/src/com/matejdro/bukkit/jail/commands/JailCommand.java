@@ -2,13 +2,21 @@ package com.matejdro.bukkit.jail.commands;
 
 import java.awt.Color;
 
-import com.matejdro.bukkit.jail.*;
 import me.muizers.Notifications.Notification;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import com.matejdro.bukkit.jail.Jail;
+import com.matejdro.bukkit.jail.JailLog;
+import com.matejdro.bukkit.jail.JailPrisoner;
+import com.matejdro.bukkit.jail.PrisonerManager;
+import com.matejdro.bukkit.jail.Setting;
+import com.matejdro.bukkit.jail.Settings;
+import com.matejdro.bukkit.jail.Util;
 
 public class JailCommand extends BaseCommand {	
 	public JailCommand()
@@ -18,6 +26,7 @@ public class JailCommand extends BaseCommand {
 		permission = "jail.command.jail";
 	}
 	
+	@SuppressWarnings("unused")
 	public Boolean run(CommandSender sender, String[] args) {
 
             if (args.length < 1 && sender.hasPermission("jail.command.jail"))
@@ -95,13 +104,17 @@ public class JailCommand extends BaseCommand {
                 return true;
             }
             
+            if(player.hasPermission("jail.cantbejailed")){
+            	sender.sendMessage(ChatColor.RED + "This player can not be jailed!");
+            	return true;
+            }
+            
             if(Jail.prisoners.containsKey(playerName)){
             	Util.Message(Settings.getGlobalString(Setting.MessagePlayerAlreadyJailed), sender);
             	return true;
             }
             
             else if (player != null) playerName = player.getName().toLowerCase();
-
                 JailPrisoner prisoner;
                 if(player != null){
                     prisoner = new JailPrisoner(playerName, time * 6, jailname, cellname, false, "", reason, muted, "", sender instanceof Player ? ((Player) sender).getName() : "console", "", player.getGameMode());
