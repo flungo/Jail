@@ -117,6 +117,12 @@ public class JailCommand extends BaseCommand {
             else if (player != null) playerName = player.getName().toLowerCase();
                 JailPrisoner prisoner;
                 if(player != null){
+                	
+                	//If they're riding something when they are jailed, eject them from their ride.
+                	if(player.isInsideVehicle()) {
+                		player.getVehicle().eject();
+                	}
+                	
                     prisoner = new JailPrisoner(playerName, time * 6, jailname, cellname, false, "", reason, muted, "", sender instanceof Player ? ((Player) sender).getName() : "console", "", player.getGameMode());
                     PrisonerManager.PrepareJail(prisoner, player);
                 }else{
@@ -138,7 +144,7 @@ public class JailCommand extends BaseCommand {
                 String message;
                 JailLog logger = new JailLog();
 
-                if (player == null){
+            if (player == null){
                 message = Settings.getGlobalString(Setting.MessagePrisonerOffline);
                 if(Settings.getGlobalBoolean(Setting.EnableLogging)){
                     logger.logToFile(player, time, reason, sender.getName(), args[0]);
