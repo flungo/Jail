@@ -19,7 +19,13 @@ public class JailScoreboardManager {
 		for(String name: Jail.prisoners.keySet()){
 			scoreboards.put(name, manager.getNewScoreboard());
 		}
-		for(String name: scoreboards.keySet()){
+		
+		//ConcurrentModificationException are bound to happen when you're iterating over a hashmap (or anything related) and while
+		//you iterate over it you are adding to it or removing from it. To avoid this, just create a temporary copy of it and
+		//iterate over the temporary one and make changes to the real one.
+		HashMap<String, Scoreboard> temp = new HashMap<String, Scoreboard>(scoreboards);
+		
+		for(String name: temp.keySet()){
 			Scoreboard board = scoreboards.get(name);
 			Objective obj;
 			if(!Jail.prisoners.containsKey(name)){
