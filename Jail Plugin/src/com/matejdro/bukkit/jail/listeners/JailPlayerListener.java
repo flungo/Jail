@@ -108,7 +108,8 @@ public class JailPlayerListener implements Listener {
 					 prisoner.setCell(jail.getNearestCell(event.getPlayer().getLocation()));
 				 }
 				 
-				 event.getPlayer().teleport(prisoner.getCell().getTeleportLocation());
+				 //Add a ternary null check, check again since we tried to set their cell above, and if it is still null then just teleport them to the jail's teleport location
+				 event.getPlayer().teleport(prisoner.getCell() != null ? prisoner.getCell().getTeleportLocation() : prisoner.getJail().getTeleportLocation());
 				 event.getPlayer().setGameMode(GameMode.SURVIVAL);
 		}
 			 
