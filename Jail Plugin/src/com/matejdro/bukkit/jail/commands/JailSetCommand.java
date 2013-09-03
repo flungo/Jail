@@ -135,7 +135,7 @@ public class JailSetCommand extends BaseCommand {
 	public static void JailSetPlayer(CommandSender sender, String[] args)
 	{
 		String parameter = args[1];
-		JailPrisoner prisoner = Jail.prisoners.get(args[0]);
+		JailPrisoner prisoner = Jail.prisoners.get(args[0].toLowerCase());
 		
 		if (prisoner == null)
 		{
