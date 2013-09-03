@@ -138,7 +138,7 @@ public class JailCommand extends BaseCommand {
                 String message;
                 JailLog logger = new JailLog();
 
-                if (player == null){
+            if (player == null){
                 message = Settings.getGlobalString(Setting.MessagePrisonerOffline);
                 if(Settings.getGlobalBoolean(Setting.EnableLogging)){
                     logger.logToFile(player, time, reason, sender.getName(), args[0]);
