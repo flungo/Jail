@@ -104,8 +104,8 @@ public enum Setting {
 	MessagePreventedInteractionPenalty("Messages.PreventedInteractionPenalty", "Don't do that in Jail!  You have just earned additional 10 minutes in jail!"),
 	MessageAFKKick("Messages.MessageAFKKick", "Do not be AFK in jail!"),
 	MessageJailPayAmountForever("Messages.MessageJailPayAmountForever", "To get out of this mess, you will have to pay <Amount>."),
-	MessageJailPayCannotPay("Mesasges.JailPayCannotPay", "Sorry, money won't help you this time."),
-	MessageJailPayCannotPayHim("Mesasges.JailPayCannotPayHim", "Sorry, money won't help him this time."),
+	MessageJailPayCannotPay("Messages.JailPayCannotPay", "Sorry, money won't help you this time."),
+	MessageJailPayCannotPayHim("Messages.JailPayCannotPayHim", "Sorry, money won't help him this time."),
 	MessageJailPayNotEnoughMoney("Messages.JailPayNotEnoughMoney", "You don't have that much money!"),
 	MessageJailPayNotEnoughMoneySelected("Messages.JailPayNotEnoughMoneySelected", "That won't be enough for your sentence!"),
 	MessageJailPayCost("Messages.JailPayCost", "1 minute of your sentence will cost you <MinutePrice>. That means that cost for releasing you out of the jail is <WholePrice>."),
@@ -125,7 +125,7 @@ public enum Setting {
 	MessageNeverOnThisServer("Messages.NeverOnThisServer", "Player <Player> was never on this server!"),
 	MessageTooLongReason("Messages.TooLongReason", "Reason is too long!"),
 	MessagePrisonerJailed("Messages.PrisonerJailed", "Prisoner <Player> jailed."),
-	MessagePrisonerOffline("Message.PrisonerOffline", "Prisoner <Player> is offline. He will be moved to jail at next login."),
+	MessagePrisonerOffline("Messages.PrisonerOffline", "Prisoner <Player> is offline. He will be moved to jail at next login."),
 	MessageEscape("Messages.Escape", "<Player> has escaped from jail!"),
 
 	//Jail Vote
