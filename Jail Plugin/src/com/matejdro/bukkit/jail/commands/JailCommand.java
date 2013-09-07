@@ -25,7 +25,7 @@ public class JailCommand extends BaseCommand {
 		adminCommand = true;
 		permission = "jail.command.jail";
 	}
-	
+
 	@SuppressWarnings("unused")
 	public Boolean run(CommandSender sender, String[] args) {
 
@@ -49,6 +49,12 @@ public class JailCommand extends BaseCommand {
             String reason = "";
             Boolean muted = Settings.getGlobalBoolean(Setting.AutomaticMute);
 
+            //Check if the player is currently jailed
+            if(Jail.prisoners.containsKey(playerName)){
+            	Util.Message(Settings.getGlobalString(Setting.MessagePlayerAlreadyJailed), sender);
+            	return true;
+            }
+            
             //Parse command line
             for (int i = 1; i < args.length; i++)
             {
@@ -97,59 +103,37 @@ public class JailCommand extends BaseCommand {
             }
 
             Player player = Util.getPlayer(playerName, true);
-
-            if (player == null && !Util.playerExists(playerName))
-            {
-                Util.Message(Settings.getGlobalString(Setting.MessageNeverOnThisServer).replace("<Player>", playerName), sender);
-                return true;
-            }
+            JailPrisoner prisoner = null;
+            String message;
+            JailLog logger = new JailLog();
             
-            if(player.hasPermission("jail.cantbejailed")){
-            	sender.sendMessage(ChatColor.RED + "This player can not be jailed!");
-            	return true;
-            }
-            
-            if(Jail.prisoners.containsKey(playerName)){
-            	Util.Message(Settings.getGlobalString(Setting.MessagePlayerAlreadyJailed), sender);
-            	return true;
-            }
-            
-            else if (player != null) playerName = player.getName().toLowerCase();
-                JailPrisoner prisoner;
-                if(player != null){
-                	
-                	//If they're riding something when they are jailed, eject them from their ride.
-                	if(player.isInsideVehicle()) {
-                		player.getVehicle().eject();
-                	}
-                	
-                    prisoner = new JailPrisoner(playerName, time * 6, jailname, cellname, false, "", reason, muted, "", sender instanceof Player ? ((Player) sender).getName() : "console", "", player.getGameMode());
-                    PrisonerManager.PrepareJail(prisoner, player);
-                }else{
-                    prisoner = new JailPrisoner(playerName, time * 6, jailname, cellname, false, "", reason, muted, "", sender instanceof Player ? ((Player) sender).getName() : "console", "", GameMode.SURVIVAL);
-                    PrisonerManager.PrepareJail(prisoner, player);
-                }
-
-                if(Jail.instance.notificationsPlugin != null){
-                    Notification jailNotification = new Notification("Jail", playerName + " was jailed by " + sender.getName(), "For " + time + " mins", Color.ORANGE, Color.RED, Color.RED);
-                    Jail.instance.notificationsPlugin.showNotification(jailNotification);
-                }
-
-                if(player != null && Util.playerExists(playerName)){
-                    player.setGameMode(GameMode.SURVIVAL);
-                }else if(!Util.playerExists(playerName)){
-                    Util.Message(Settings.getGlobalString(Setting.MessageNeverOnThisServer).replace("<Player>", playerName), sender);
-                }
-
-                String message;
-                JailLog logger = new JailLog();
-
-            if (player == null){
+            if(player == null) {//If the player isn't online, then let's handle him seperately
+            	if(!Util.playerExists(playerName)) {
+            		Util.Message(Settings.getGlobalString(Setting.MessageNeverOnThisServer).replace("<Player>", playerName), sender);
+                    return true;
+            	}
+            	
+            	prisoner = new JailPrisoner(playerName, time * 6, jailname, cellname, false, "", reason, muted, "", sender instanceof Player ? ((Player) sender).getName() : "console", "", GameMode.SURVIVAL);
+                PrisonerManager.PrepareJail(prisoner, player);
+            	
                 message = Settings.getGlobalString(Setting.MessagePrisonerOffline);
                 if(Settings.getGlobalBoolean(Setting.EnableLogging)){
                     logger.logToFile(player, time, reason, sender.getName(), args[0]);
                 }
-            }else{
+                
+            }else {//The player is online
+            	if(player.hasPermission("jail.cantbejailed")){
+                	sender.sendMessage(ChatColor.RED + "This player can not be jailed!");
+                	return true;
+                }
+            	
+            	playerName = player.getName().toLowerCase();
+            	
+            	prisoner = new JailPrisoner(playerName, time * 6, jailname, cellname, false, "", reason, muted, "", sender instanceof Player ? ((Player) sender).getName() : "console", "", player.getGameMode());
+                PrisonerManager.PrepareJail(prisoner, player);
+                
+                player.setGameMode(GameMode.SURVIVAL);
+                
                 message = Settings.getGlobalString(Setting.MessagePrisonerJailed);
                 if(Settings.getGlobalBoolean(Setting.BroadcastJailMessage)){
                     String reason1 = "No reason set";
@@ -164,6 +148,13 @@ public class JailCommand extends BaseCommand {
                     logger.logToFile(player, time, reason, sender.getName(), player.getName());
                 }
             }
+
+            
+            if(Jail.instance.notificationsPlugin != null){
+                Notification jailNotification = new Notification("Jail", playerName + " was jailed by " + sender.getName(), "For " + time + " mins", Color.ORANGE, Color.RED, Color.RED);
+                Jail.instance.notificationsPlugin.showNotification(jailNotification);
+            }
+            
             message = prisoner.parseTags(message);
             Util.Message(message, sender);
             return true;
