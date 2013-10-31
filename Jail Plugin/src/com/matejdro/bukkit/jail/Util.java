@@ -1,0 +1,185 @@
+package com.matejdro.bukkit.jail;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+import java.util.logging.Level;
+
+import net.milkbowl.vault.permission.Permission;
+
+import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.permissions.PermissionDefault;
+import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.RegisteredServiceProvider;
+
+public class Util {
+    public static Permission permission = null;
+    
+	public static void Message(String message, Player player)
+	{
+		player.sendMessage(message);
+	}
+	
+	public static void Message(String message, CommandSender sender)
+	{
+		if (sender == null) return;
+		if (sender instanceof Player)
+		{
+			Message(message, (Player) sender);
+		}
+		else
+		{
+			sender.sendMessage(message);
+		}
+	}
+	
+	public static Boolean permission(JailZone jail, Player player, String line, PermissionDefault def)
+    {
+	    	Plugin plugin = Jail.instance.getServer().getPluginManager().getPlugin("Vault");
+			if (plugin != null && setupPermissions())
+    	    	return permission.has(player, line);
+    	     else 
+    	    	return player.hasPermission(new org.bukkit.permissions.Permission(line, def));
+    }
+	
+    public static Boolean permission(Player player, String line, PermissionDefault def)
+    {
+	    	Plugin plugin = Jail.instance.getServer().getPluginManager().getPlugin("Vault");
+			if (plugin != null && setupPermissions())
+    	    	return permission.has(player, line);
+    	     else 
+    	    	return player.hasPermission(new org.bukkit.permissions.Permission(line, def));
+    }
+    
+    public static int getNumberOfOccupiedItemSlots(ItemStack[] items)
+    {
+    	int size = 0;
+    	for (ItemStack i : items)
+    	{
+    		if (i != null) size++;
+    	}
+    	return size;
+    }
+    
+    public static Boolean isInteger(String text) {
+    	  try {
+    	    Integer.parseInt(text);
+    	    return true;
+    	  } catch (NumberFormatException e) {
+    	    return false;
+    	  }
+    	}
+    
+    public static void debug(JailPrisoner prisoner, String text)
+    {
+    	debug("[p " + prisoner.getName() + "] " + text);
+    }
+    
+    public static void debug(String text)
+    {
+    	if (Settings.getGlobalBoolean(Setting.Debug))
+    	{
+    		try {
+    			FileWriter fstream = new FileWriter(new File("plugins" + File.separator + "Jail","debug.log"), true);
+    			BufferedWriter out = new BufferedWriter(fstream);
+    			DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
+    			out.append("[" + dateFormat.format(new Date()) + "] " + text);
+    	    	out.newLine();
+    	    	  //Close the output stream
+    	    	out.close();
+    	    	fstream.close();
+    		} catch (IOException e) {
+    			Jail.log.log(Level.SEVERE, "[Jail]: Unable to write debug data to log file.");
+
+    			e.printStackTrace();
+    		}
+    	}
+    }
+    
+    public static void changeSkin(Player player, String skin)
+	{
+    	// Removed for now
+	}
+        
+    public static void setPermissionsGroups(String playerName, List<String> groups, String world)
+    {
+    	Plugin plugin = Jail.instance.getServer().getPluginManager().getPlugin("Vault");
+		if (plugin == null)
+		{
+			Jail.log.info("[Jail] You must have Vault plugin installed to use permission changing feature! See http://dev.bukkit.org/server-mods/vault");
+			return;
+		}
+		if (!setupPermissions()) 
+		{
+			Jail.log.info("[Jail] You must have one of the Permissions plugins installed to use permission changing feature! See http://dev.bukkit.org/server-mods/vault");
+			return;
+		}
+		
+		for (String g : permission.getPlayerGroups(world, playerName))
+				permission.playerRemoveGroup(world, playerName, g);
+		for (String g : groups)
+				permission.playerAddGroup(world, playerName, g);
+		
+    }
+    
+    public static List<String> getPermissionsGroups(String playerName, String world)
+    {
+    	Plugin plugin = Jail.instance.getServer().getPluginManager().getPlugin("Vault");
+		if (plugin == null)
+		{
+			Jail.log.info("[Jail] You must have Vault plugin installed to use permission changing feature! See http://dev.bukkit.org/server-mods/vault");
+			return new ArrayList<String>();
+		}
+		if (!setupPermissions()) 
+		{
+			Jail.log.info("[Jail] You must have one of the Permissions plugins installed to use permission changing feature! See http://dev.bukkit.org/server-mods/vault");
+			return new ArrayList<String>();
+		}
+		
+		return Arrays.asList(permission.getPlayerGroups(world, playerName));		
+    }    
+    
+    private static Boolean setupPermissions()
+    {
+    	if (permission != null) return true;
+    	
+        RegisteredServiceProvider<Permission> permissionProvider = Bukkit.getServer().getServicesManager().getRegistration(net.milkbowl.vault.permission.Permission.class);
+        if (permissionProvider != null) {
+            permission = permissionProvider.getProvider();
+        }
+        return (permission != null);
+    }
+    
+    public static Player getPlayer(String name, Boolean partialName)
+    {
+    	Player player = Bukkit.getServer().getPlayerExact(name);
+		if (player == null && partialName) player = Bukkit.getServer().getPlayer(name);
+		
+		return player;
+    }
+    
+    public static Boolean playerExists(String name)
+    {
+    	name = name.toLowerCase();
+    	
+		for (OfflinePlayer p : Bukkit.getServer().getOfflinePlayers())
+		{
+			if (p.getName().toLowerCase().equals(name))
+			{
+				return true;
+			}
+		}
+		
+		return false;
+    }
+}
