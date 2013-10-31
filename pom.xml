@@ -2,9 +2,9 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<!-- Project information -->
-	<groupId>com.matejdro.bukkit.jail</groupId>
-	<artifactId>Jail</artifactId>
-	<name>Jail</name>
+	<groupId>me.flungo.bukkit</groupId>
+	<artifactId>JailPlus</artifactId>
+	<name>JailPlus</name>
 	<version>1.0</version>
 
 	<properties>
