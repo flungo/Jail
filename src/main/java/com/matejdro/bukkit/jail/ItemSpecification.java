@@ -44,24 +44,38 @@ public class ItemSpecification {
 		return dv;
 	}
 	
-	public boolean equals(ItemSpecification spec) {
+	public boolean match(ItemSpecification spec) {
+		if (spec == null) {
+			return false;
+		}
+		if (spec == this) {
+			return true;
+		}
 		if (spec.id != this.id) {
 			return false;
 		}
-		if (!spec.dv.equals(this.dv)) {
+		if (this.dv != null && !spec.dv.equals(this.dv)) {
 			return false;
 		}
 		return true;
 	}
 	
-	public boolean equals(ItemStack item) {
+	public boolean match(ItemStack item) {
+		if (item == null) {
+			return false;
+		}
 		if (this.id != item.getTypeId()) {
 			return false;
 		}
-		if (this.dv != null && this.dv.equals(item.getDurability())) {
+		if (this.dv != null && !this.dv.equals(item.getDurability())) {
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "ItemSpec[id=" + id + ", dv=" + dv + "]";
 	}
 	
 	public static List<ItemSpecification> convertStringList(List<String> stringList) {
@@ -70,6 +84,18 @@ public class ItemSpecification {
 			itemList.add(new ItemSpecification(item));
 		}
 		return itemList;
+	}
+	
+	public static boolean listContains(List<ItemSpecification> list, ItemStack stack) {
+		if (stack == null) {
+			return false;
+		}
+		for (ItemSpecification spec : list) {
+			if (spec.match(stack)) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 }

@@ -10,7 +10,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
-import org.bukkit.material.Wool;
 import org.bukkit.permissions.PermissionDefault;
 
 /**
@@ -362,7 +361,7 @@ public class JailStick {
 			boolean hasItem = false;
 			items:
 			for (ItemStack item : victim.getInventory()) {
-				if (requiredItems.contains(item)) {
+				if (ItemSpecification.listContains(requiredItems, item)) {
 					hasItem = true;
 					// If the victim has the item and they don't need all items they we know they passed the items test and can break from this loop.
 					if (!requireAllItems) {
@@ -599,11 +598,13 @@ public class JailStick {
 	public void invokeActions(Player holder, Player victim) {
 		Inventory inv = victim.getInventory();
 		for (ItemStack item : inv) {
-			if (takeItems.contains(item)) {
+			if (ItemSpecification.listContains(takeItems, item)) {
 				inv.remove(item);
 			}
-			if (friskItems.contains(item)) {
-				holder.getInventory().addItem(item);
+			if (ItemSpecification.listContains(friskItems, item)) {
+				for (ItemStack stack : inv.all(item).values()) {
+					holder.getInventory().addItem(item);
+				}
 				inv.remove(item);
 			}
 		}
